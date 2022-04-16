@@ -53,7 +53,7 @@ public class DrugInfoController {
      */
     @RequestMapping("/drugInfoQueryPage")
     @ResponseBody
-    public Object drugInfoQueryPage(String param, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public Object drugInfoQueryPage(String param, @RequestParam(value = "page",defaultValue = "1") int pageNum, @RequestParam(value = "limit",defaultValue = "10") int pageSize) {
         try {
             IPage<DrugInfo> iPage = druginfoService.selectDrugInfoPage(pageNum, pageSize, param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);

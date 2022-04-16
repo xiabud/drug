@@ -1,11 +1,15 @@
 package com.xiecode.drug.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.time.LocalDateTime;
-import java.io.Serializable;
+import com.xiecode.drug.common.DateUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.io.Serializable;
+import java.util.Date;
 
 /**
  * <p>
@@ -55,7 +59,17 @@ public class SaleInfo implements Serializable {
     /**
      * 操作时间
      */
-    private LocalDateTime operateTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date operateTime;
+
+    /**
+     * 将操作时间转换成年月日
+     * */
+    @TableField(exist = false)
+    private String operateTimeStr;
+    public String getOperateTimeStr() {
+        return DateUtil.dataConvert(operateTime);
+    }
 
 
 }

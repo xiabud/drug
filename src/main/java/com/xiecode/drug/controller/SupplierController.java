@@ -53,7 +53,7 @@ public class SupplierController {
      */
     @RequestMapping("/supplierQueryPage")
     @ResponseBody
-    public Object supplierQueryPage(String param, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public Object supplierQueryPage(String param, @RequestParam(value = "page",defaultValue = "1") int pageNum, @RequestParam(value = "limit",defaultValue = "10") int pageSize) {
         try {
             IPage<Supplier> iPage = supplierService.selectSupplierPage(pageNum, pageSize, param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);

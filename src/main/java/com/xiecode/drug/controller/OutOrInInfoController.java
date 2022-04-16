@@ -52,7 +52,7 @@ public class OutOrInInfoController {
      */
     @RequestMapping("/outOrInInfoQueryPage")
     @ResponseBody
-    public Object outOrInInfoQueryPage(String param, @RequestParam(defaultValue = "1") int pageNum, @RequestParam(defaultValue = "10") int pageSize) {
+    public Object outOrInInfoQueryPage(String param, @RequestParam(value = "page",defaultValue = "1") int pageNum, @RequestParam(value = "limit",defaultValue = "10") int pageSize) {
         try {
             IPage<OutOrInInfo> iPage = outorininfoService.selectOutOrInInfoPage(pageNum, pageSize, param);
             return ResultMapUtil.getHashMapMysqlPage(iPage);
