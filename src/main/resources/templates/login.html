@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>医院药品管理系统</title>
+    <link rel="stylesheet" th:href="@{static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{static/admin/style.css}" media="all">
+</head>
+<body>
+    <div class="login-main">
+        <header class="layui-elip">用户登录</header>
+        <form class="layui-form">
+            <div class="layui-input-inline">
+                <input type="text" name="username" required lay-verify="required" placeholder="用户名" class="layui-input" autocomplete="off">
+            </div>
+            <div class="layui-input-inline">
+                <input type="password" name="password" required lay-verify="required" placeholder="密码" class="layui-input" autocomplete="off">
+            </div>
+            <div class="layui-input-inline login-btn">
+                <button lay-submit lay-filter="login" class="layui-btn">登录</button>
+            </div>
+        </form>
+    </div>
+
+    <script th:src="@{/static/layui/layui.js}"></script>
+    <script>
+        layui.use("form", function () {
+            var form = layui.form;
+            var $ = layui.$;
+            //监听提交
+            form.on("submit(login)", function (data) {
+                $.ajax({
+                    url:"/toLogin",
+                    type:"POST",
+                    data:data.field,
+                    dataType:"json",
+                    success: function (result) {
+                        if (result.code == "1") {
+                            layer.msg(result.msg, {icon: result.icon, anim: result.anim}, function () {
+                                location.href = "/index" //登录转向后台主页
+                            });
+                        } else {
+                            layer.msg(result.msg, {icon: result.icon, anim: result.anim});
+                        }
+                    }
+                });
+                return false;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>医院药品管理系统</title>
+    <!--引入本地的css和js-->
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
+    <!-- 引入layui css -->
+    <!--<link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css" />-->
+    <!-- 引入layui js -->
+    <!--<script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <!--顶部菜单-->
+    <div class="layui-header">
+        <ul class="layui-nav">
+        <li class="layui-logo">医院药品管理系统</li>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="/logout">退出系统</a>
+            </li>
+        </ul>
+        </ul>
+    </div>
+    <!--侧边栏-->
+    <div class="layui-side layui-bg-black">
+        <ul class="layui-nav layui-nav-tree" lay-shrink="all">
+            <!--<li class="layui-nav-item layui-nav-itemed ">这个是默认展开-->
+            <li class="layui-nav-item ">
+                <a href="javascript:" class="layui-nav-item">药品库存管理</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="#" class="site-demo-active" lay-href="/outOrInInfo" data-id="11" data-title="登记出入库信息">
+                            登记出入库信息
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="#" class="site-demo-active" lay-href="/drugProblemInfo" data-id="12" data-title="登记出入库信息">
+                            登记问题药品信息
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="#" class="site-demo-active" lay-href="/warranty" data-id="12" data-title="药品保质期检查">
+                            药品保质期检查
+                        </a>
+                    </dd>
+
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:" class="layui-nav-item">药品销售管理</a>
+            </li>
+            <li class="layui-nav-item">
+                <a href="javascript:" class="layui-nav-item " >药品明细查询</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="#" class="site-demo-active" lay-href="/supplier" data-id="31" data-title="供应商信息">
+                            供应商信息
+                        </a>
+                    </dd>
+                    <dd>
+                        <a href="#" class="site-demo-active" lay-href="/drugInfo" data-id="32" data-title="药品信息">
+                            药品信息
+                        </a>
+                    </dd>
+                </dl>
+            </li>
+        </ul>
+    </div>
+    <!--主体部分-->
+    <div class="layui-body">
+        <div class="layui-tab" lay-filter="demo" lay-allowclose="ture" style="margin: 0;">
+            <ul class="layui-tab-title"></ul>
+            <div class="layui-tab-content"></div>
+        </div>
+    </div>
+    <div class="layui-footer">
+        医院药品管理系统 _ _ 底部固定区域
+    </div>
+</div>
+</body>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['element', 'layer', 'jquery'], function () {
+        var element = layui.element;
+        var $ = layui.$;
+        //左侧菜单树叶点击事件
+        $('.site-demo-active').on('click', function () {
+            var dataid = $(this);
+            //判斷右侧是否有tab
+            if ($(".layui-tab-title li[lay-id]").length <= 0) {
+                //没有tab，直接打开新的tab
+                active.tabAdd(dataid.attr('lay-href'), dataid.attr('data-id'), dataid.attr('data-title'));
+            } else {
+                //判断该tab项是否已经存在
+                var isExist = false;
+                $.each($(".layui-tab-title li[lay-id]"), function () {
+                    //如果点击左侧菜单栏传入的id在右侧tab项中的lay-id可以找到，说明该tab项已经打开
+                    if ($(this).attr("lay-id") == dataid.attr("data-id")) {
+                        isExist = true;
+                    }
+                });
+                if (isExist == false) {
+                    //不穿在当前id对应的tab，直接打开新的tab
+                    active.tabAdd(dataid.attr('lay-href'), dataid.attr('data-id'), dataid.attr('data-title'));
+                }
+            }
+            //不管是不是新增了tab，最后都要转向要打开的选项页面
+            active.tabChange(dataid.attr("data-id"));
+        });
+
+        //配置active，绑定几个事件,后面可以用active调用这些事件
+        var active = {
+
+            /*
+            * 新增tab项
+            * url是页面地址，id是对应data-id，name对应标题
+            *
+            * */
+            tabAdd: function (url, id, name) {
+                element.tabAdd('demo', {
+                    title: name,
+                    content: '<iframe data-frameid="' + id + '"scrolling="auto" frameborder="0" src="' + url + '" style="width: 100%;height: 750px"></iframe>',
+                    id: id
+                });
+            },
+            /*
+            * 根据id切换到指定的tab
+            * */
+            tabChange: function (id) {
+                element.tabChange('demo',id);
+            },
+            /*
+            * 关闭指定的tab
+            * */
+            tabDelete: function (id) {
+                element.tabDelete('demo', id);
+            }
+        };
+
+    });
+</script>
+
+</html>

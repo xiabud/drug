@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>供应商信息</title>
+    <!--引入本地的css和js-->
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
+<!--     引入layui css
+    <link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css" />
+     引入layui js
+    <script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>-->
+</head>
+<body>
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form layui-form-pane" action="">
+                <input name="id" th:value="${obj?.id}" class="layui-input layui-hide"/>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">供应商名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="name" th:value="${obj?.name}" lay-verify="required" placeholder="请输入供应商名称" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">供应商描述</label>
+                    <div class="layui-input-block">
+                        <textarea name="content" th:text="${obj?.content}" lay-verify="required" placeholder="请输入供应商描述" autocomplete="off" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-hide">
+                    <input type="button" lay-submit lay-filter="LAY-from-submit" id="LAY-from-submit" value="确认">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['form'], function () {
+        var $ = layui.$;
+    });
+</script>
+
+</html>
