@@ -48,29 +48,29 @@ public class ReturnGoodsInfoServiceImpl extends ServiceImpl<ReturnGoodsInfoMappe
     }
 
     /**
-     * @param returnDoodsInfo
+     * @param returnGoodsInfo
      * @Description: 新增一条药品退货记录信息
-     * @param: [returnDoodsInfo]
+     * @param: [returnGoodsInfo]
      * @return: int
      * @Author: Xiewc
      * @Date: 2022/4/17
      */
     @Override
-    public int addReturnGoodsInfo(ReturnGoodsInfo returnDoodsInfo) {
-        return returnGoodsInfoMapper.insert(returnDoodsInfo);
+    public int addReturnGoodsInfo(ReturnGoodsInfo returnGoodsInfo) {
+        return returnGoodsInfoMapper.insert(returnGoodsInfo);
     }
 
     /**
-     * @param returnDoodsInfo
+     * @param returnGoodsInfo
      * @Description: 编辑修改一条药品退货记录信息
-     * @param: [returnDoodsInfo]
+     * @param: [returnGoodsInfo]
      * @return: int
      * @Author: Xiewc
      * @Date: 2022/4/17
      */
     @Override
-    public int editReturnGoodsInfo(ReturnGoodsInfo returnDoodsInfo) {
-        return returnGoodsInfoMapper.updateById(returnDoodsInfo);
+    public int editReturnGoodsInfo(ReturnGoodsInfo returnGoodsInfo) {
+        return returnGoodsInfoMapper.updateById(returnGoodsInfo);
     }
 
     /**
