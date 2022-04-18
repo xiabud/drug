@@ -52,10 +52,10 @@ public class ResultMapUtil {
     /**
     * @Description: 异常数据统一处理
     * @param: [e]
-    * @return: java.util.HashMap<java.lang.String,java.lang.Object>
-    * @Author: Xiewc
-    * @Date: 2022/2/21
-    */
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/2/21
+     */
     public static HashMap<String, Object> getHashMapException(Exception e) {
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("code", 0);
@@ -64,13 +64,23 @@ public class ResultMapUtil {
     }
 
 
+    public static HashMap<String, Object> getStockLess() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "保存失败,库存不够！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+
     /**
-    * @Description: 保存成功统一返回格式
-    * @param: [i]
-    * @return: java.util.HashMap<java.lang.String,java.lang.Object>
-    * @Author: Xiewc
-    * @Date: 2022/3/1
-    */
+     * @Description: 保存成功统一返回格式
+     * @param: [i]
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/3/1
+     */
     public static HashMap<String, Object> getHashMapSave(int i) {
         HashMap<String, Object> resultMap = new HashMap<>();
         if (i == 0) {

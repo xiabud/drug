@@ -1,7 +1,10 @@
 package com.xiecode.drug.mapper;
 
-import com.xiecode.drug.pojo.DrugInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xiecode.drug.pojo.DrugInfo;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +14,20 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author xiewc
  * @since 2022-03-01
  */
+@Mapper
+@Repository
 public interface DrugInfoMapper extends BaseMapper<DrugInfo> {
 
+    /**
+     * @Description: 更新药品的库存
+     * @param: [count]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    int updateAddStock(@Param("count") int count, @Param("dName") String dName);
+
+    int updateReduceStock(@Param("count") int count, @Param("dName") String dName);
+
+    int selectStock(@Param("dName") String dName);
 }

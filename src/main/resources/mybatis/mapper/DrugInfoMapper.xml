@@ -2,4 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.DrugInfoMapper">
 
+    <update id="updateAddStock">
+        UPDATE drug_info SET stock = stock + ${count} WHERE name= #{dName}
+    </update>
+    <update id="updateReduceStock">
+        UPDATE drug_info SET stock = stock - ${count} WHERE name= #{dName}
+    </update>
+    <select id="selectStock" resultType="java.lang.Integer">
+        select stock FROM drug_info WHERE name = #{dName}
+    </select>
 </mapper>

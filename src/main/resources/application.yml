@@ -15,7 +15,7 @@ spring:
     cache: false
 
 mybatis-plus:
+  mapper-locations: mybatis/mapper/*.xml
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-
 

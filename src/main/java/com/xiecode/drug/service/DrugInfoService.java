@@ -63,12 +63,39 @@ public interface DrugInfoService extends IService<DrugInfo> {
     int deleteDrugInfoByID(int id);
 
     /**
-    * @Description: 查询所有药品的列表
-    * @param: []
-    * @return: java.util.List<com.xiecode.drug.pojo.DrugInfo>
-    * @Author: Xiewc
-    * @Date: 2022/3/1
-    */
+     * @Description: 查询所有药品的列表
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInfo>
+     * @Author: Xiewc
+     * @Date: 2022/3/1
+     */
     List<DrugInfo> queryDrugInfoList();
 
+
+    /**
+     * @Description: 修改药品的库存（添加）
+     * @param:
+     * @return:
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    int updateAddStock(int count, String dname);
+
+    /**
+     * @Description: 修改药品的库存（减少）
+     * @param:
+     * @return:
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    int updateReduceStock(int count, String dname);
+
+    /**
+     * @Description: 查询药品的库存
+     * @param: [dname]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    int selectStock(String dname);
 }

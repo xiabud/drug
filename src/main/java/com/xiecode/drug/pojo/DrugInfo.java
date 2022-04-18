@@ -65,7 +65,7 @@ public class DrugInfo implements Serializable {
     /**
      * 库存
      */
-    private Integer stock;
+    private Integer stock = 0;
 
 
     /**

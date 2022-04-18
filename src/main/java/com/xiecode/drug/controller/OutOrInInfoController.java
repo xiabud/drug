@@ -4,6 +4,7 @@ package com.xiecode.drug.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.OutOrInInfo;
+import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.OutOrInInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,6 +30,8 @@ public class OutOrInInfoController {
     @Autowired
     private OutOrInInfoService outorininfoService;
 
+    @Autowired
+    private DrugInfoService drugInfoService;
 
     /**
      * @Description: 转向药品出入库页面
@@ -87,6 +90,19 @@ public class OutOrInInfoController {
     @ResponseBody
     public Object outOrInInfoAdd(OutOrInInfo outorininfo) {
         try {
+            System.out.println("===========" + outorininfo + "============");
+            if (outorininfo.getType().equals("入库")) {
+                //更新药品信息里面的库存
+                drugInfoService.updateAddStock(outorininfo.getCount(), outorininfo.getDname());
+            } else if (outorininfo.getType().equals("出库")) {
+                //检查药品信息里面的库存，如果库存小于出库数量，则这一单无法输出。
+                int stock = drugInfoService.selectStock(outorininfo.getDname());
+                if (stock < outorininfo.getCount()) {
+                    return ResultMapUtil.getStockLess();
+                }
+                //如果库存足够，则更新药品信息里面的库存
+                drugInfoService.updateReduceStock(outorininfo.getCount(), outorininfo.getDname());
+            }
             outorininfo.setCreateTime(new Date());
             int i = outorininfoService.addOutOrInInfo(outorininfo);
             return ResultMapUtil.getHashMapSave(i);

@@ -112,4 +112,43 @@ public class DrugInfoServiceImpl extends ServiceImpl<DrugInfoMapper, DrugInfo> i
     public List<DrugInfo> queryDrugInfoList() {
         return drugInfoMapper.selectList(null);
     }
+
+    /**
+     * @param count
+     * @Description: 修改药品的库存（增加）
+     * @param:
+     * @return:
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    @Override
+    public int updateAddStock(int count, String dname) {
+        return drugInfoMapper.updateAddStock(count, dname);
+    }
+
+    /**
+     * @Description: 修改药品的库存（减少）
+     * @param: [count, dname]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    @Override
+    public int updateReduceStock(int count, String dname) {
+        return drugInfoMapper.updateReduceStock(count, dname);
+    }
+
+    /**
+     * @Description: 查询药品的库存
+     * @param: [dname]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    @Override
+    public int selectStock(String dname) {
+        return drugInfoMapper.selectStock(dname);
+    }
+
+
 }
