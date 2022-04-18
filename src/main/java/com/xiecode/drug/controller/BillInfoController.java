@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.List;
+
 /**
  * <p>
  * 销售记录 前端控制器
@@ -167,7 +169,7 @@ public class BillInfoController {
      */
     @RequestMapping("/billInfoDelById")
     @ResponseBody
-    public Object billInfoDelById(Integer id){
+    public Object billInfoDelById(Integer id) {
         try {
             int i = billInfoService.deleteBillInfoByID(id);
             return ResultMapUtil.getHashMapDel(i);
@@ -175,7 +177,22 @@ public class BillInfoController {
             return ResultMapUtil.getHashMapException(e);
         }
     }
-    
+
+
+    /**
+     * @Description: 获取所有的药品名称
+     * @param: []
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/4/16
+     */
+    @RequestMapping("/billInfoList")
+    @ResponseBody
+    public Object drugInfoList(String sname) {
+        List<BillInfo> billInfoList = billInfoService.queryDrugInfoListBySName(sname);
+        return ResultMapUtil.getHashMapList(billInfoList);
+    }
+
 
 }
 

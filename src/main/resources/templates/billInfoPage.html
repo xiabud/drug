@@ -13,16 +13,16 @@
         <div class="layui-card-body" style="padding: 15px;">
             <form class="layui-form layui-form-pane" action="">
                 <input name="id" th:value="${obj?.id}" class="layui-input layui-hide"/>
-                <!--<div class="layui-form-item">
+                <div class="layui-form-item">
                     <label class="layui-form-label">供应商名称</label>
                     <div class="layui-input-block">
-                        <select name="sname" id="sname" ></select>
+                        <select name="sname" id="sname" lay-filter="sname"></select>
                     </div>
-                </div>-->
+                </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">药品名称</label>
                     <div class="layui-input-block">
-                        <select name="dname" id="dname" ></select>
+                        <select name="dname" id="dname" lay-filter="dname"></select>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -73,6 +73,8 @@
             type: 'post',
             cache: false,
             success: function (data) {
+                console.log(data);
+
                 $('#sname').prepend("<option value=''>请选择<option>");
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].name == currentsname) {
@@ -81,34 +83,41 @@
                         $('#sname').prepend("<option value='" + data.data[i].name + "'>" + data.data[i].name + "</option>");
                     }
                 }
+
                 //下拉列表渲染
                 form.render();
             }
         });
+        form.on('select(sname)', function (d) {
+            console.log(d.value); //得到被选中的值
+            var nowsname = d.value;
+            //当前药品的值
+            var currentdname = '[[${obj?.dname}]]';
+            //获取药品列表
+            $.ajax({
+                url: '/billInfo/billInfoList?sname=' + nowsname,
+                dataType: 'json',
+                type: 'post',
+                cache: false,
+                success: function (data) {
+                    $('#dname').empty();
+                    $('#dname').prepend("<option value=''>请选择<option>");
+                    console.log(data);
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].dname == currentdname) {
+                            $('#dname').prepend("<option selected value='" + data.data[i].dname + "'>" + data.data[i].dname + "</option>");
+                        } else {
+                            $('#dname').prepend("<option value='" + data.data[i].dname + "'>" + data.data[i].dname + "</option>");
+                        }
 
-        //当前药品的值
-        var currentdname = '[[${obj?.dname}]]';
-        //获取药品列表
-        $.ajax({
-            url: '/drugInfo/drugInfoList',
-            dataType: 'json',
-            type: 'post',
-            cache: false,
-            success: function (data) {
-                $('#dname').prepend("<option value=''>请选择<option>");
-                for (var i = 0; i < data.data.length; i++) {
-                    if (data.data[i].name == currentdname) {
-                        $('#dname').prepend("<option selected value='" + data.data[i].name + "'>" + data.data[i].name + "</option>");
-                    } else {
-                        $('#dname').prepend("<option value='" + data.data[i].name + "'>" + data.data[i].name + "</option>");
                     }
+                    data = undefined;
 
+                    //下拉列表渲染
+                    form.render();
                 }
-
-                //下拉列表渲染
-                form.render();
-            }
-        });
+            });
+        })
 
     });
 </script>

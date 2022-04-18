@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.BillInfoMapper">
 
+    <select id="queryDrugInfoListBySName" resultType="com.xiecode.drug.pojo.BillInfo">
+        select * from bill_info WHERE sname = #{sName}
+    </select>
 </mapper>

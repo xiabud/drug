@@ -69,4 +69,12 @@ public interface BillInfoService extends IService<BillInfo> {
      */
     List<BillInfo> queryBillInfoList();
 
+    /**
+     * @Description: 根据供应商名字查询药品信息
+     * @param: [sname]
+     * @return: java.util.List<com.xiecode.drug.pojo.BillInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/19
+     */
+    List<BillInfo> queryDrugInfoListBySName(String sname);
 }

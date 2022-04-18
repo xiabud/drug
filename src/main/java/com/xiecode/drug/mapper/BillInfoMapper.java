@@ -1,7 +1,10 @@
 package com.xiecode.drug.mapper;
 
-import com.xiecode.drug.pojo.BillInfo;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.xiecode.drug.pojo.BillInfo;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * <p>
@@ -13,4 +16,5 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  */
 public interface BillInfoMapper extends BaseMapper<BillInfo> {
 
+    List<BillInfo> queryDrugInfoListBySName(@Param("sName") String sname);
 }
