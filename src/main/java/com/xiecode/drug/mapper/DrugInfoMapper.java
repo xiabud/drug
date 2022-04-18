@@ -30,4 +30,6 @@ public interface DrugInfoMapper extends BaseMapper<DrugInfo> {
     int updateReduceStock(@Param("count") int count, @Param("dName") String dName);
 
     int selectStock(@Param("dName") String dName);
+
+    DrugInfo selectDrugInfoByDname(@Param("dName") String dName);
 }

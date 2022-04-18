@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>药品进货信息</title>
+    <!--引入本地的css和js-->
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
+    <script type="text/html" id="indexTpl">
+        {{d.LAY_TABLE_INDEX+1}}
+    </script>
+    <!-- 引入layui css -->
+    <!--<link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css" />-->
+    <!-- 引入layui js -->
+    <!--<script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">药品信息列表</div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="main-table" lay-filter="main-table"></table>
+                    <script type="text/html" id="toolbarDemo">
+                        <span class="layui-inline" style="width: 240px">
+                            <input class="layui-input" name="param" id="param" placeholder="根据药品名称查询"
+                                   autocomplete="off">
+                        </span>
+                        <span class="layui-btn layui-btn-sm layui-bg-red" lay-event="querySearch">
+                            <i class="layui-icon layui-icon-search"></i>查询
+                        </span>
+                        <!--<span class="layui-btn layui-btn-sm layui-bg-green" lay-event="add">
+                            <i class="layui-icon layui-icon-add-1"></i>添加
+                        </span>-->
+                    </script>
+                    <script type="text/html" id="barDemo">
+                        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['table', 'form'], function () {
+        var $ = layui.$;
+        var table = layui.table;
+        table.render({
+            elem: '#main-table',
+            height: 650,
+            url: '/drugInInfo/drugInInfoQueryPage',
+            method: 'POST',
+            page: true,
+            id: 'table-load',
+            toolbar: '#toolbarDemo',
+            cols: [
+                [
+                    {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
+                    {field: 'name', title: '药品名称', align: 'center'},
+                    {field: 'supplier', title: '供应商', align: 'center'},
+                    {field: 'warranty', title: '保质期(月)', align: 'center'},
+                    {field: 'druginnum', title: '进货批号', align: 'center'},
+                    {field: 'drugcount', title: '进货数量', align: 'center'},
+                    {field: 'druginprice', title: '进货金额', align: 'center'},
+                    {
+                        field: 'intime',
+                        title: '进货时间',
+                        align: 'center',
+                        templet: "<div>{{layui.util.toDateString(d.intime,'yyyy-MM-dd')}}</div>"
+                    },
+                    //{title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
+                ]
+            ]
+        });
+
+        //监听头工具栏的事件
+        table.on('toolbar(main-table)', function (obj) {
+            switch (obj.event) {
+                case 'add':
+                    layer.open({
+                        type: 2,
+                        title: '新增药品进货信息',
+                        content: '/drugInInfo/drugInInfoPage',
+                        shade: [0.8, '#393d49'],
+                        area: ['600px', '500px'],
+                        btn: ['确定', '取消'],
+                        yes: function (index, layero) {
+                            var iframeWindow = window['layui-layer-iframe' + index];
+                            var submit = layero.find('iframe').contents().find("#LAY-from-submit")
+                            //监听提交
+                            iframeWindow.layui.form.on('submit(LAY-from-submit)', function (data) {
+                                var filed = data.field;
+                                $.ajax({
+                                    url: '/drugInInfo/drugInInfoAdd',
+                                    data: filed,
+                                    async: false,
+                                    cache: false,
+                                    success: function (str) {
+                                        if (str.code === 0) {
+                                            table.reload('table-load');
+                                        }
+                                        layer.msg(str.msg, {icon: str.icon, anim: str.anim});
+                                    }
+                                });
+                                layer.close(index);//关闭弹窗
+                            });
+                            submit.trigger('click');
+                        },
+                        success: function (layero, index) {
+
+                        }
+
+                    });
+                    break;
+                case 'querySearch':
+                    var param = $('#param').val();
+                    table.reload('table-load', {
+                        where: {
+                            param: param
+                        }
+                    });
+                    $('#param').val(param);
+                    break;
+            }
+        });
+
+        //监听编辑和删除
+        table.on('tool(main-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit':
+                    layer.open({
+                        type: 2,
+                        title: '编辑药品信息',
+                        content: '/drugInInfo/drugInInfoQueryById?id=' + data.id,
+                        shade: [0.8, '#393d49'],
+                        area: ['600px', '500px'],
+                        btn: ['确定', '取消'],
+                        yes: function (index, layero) {
+                            var iframeWindow = window['layui-layer-iframe' + index];
+                            var submit = layero.find('iframe').contents().find("#LAY-from-submit")
+                            //监听提交
+                            iframeWindow.layui.form.on('submit(LAY-from-submit)', function (data) {
+                                var filed = data.field;
+                                $.ajax({
+                                    url: '/drugInInfo/drugInInfoEdit',
+                                    data: filed,
+                                    async: false,
+                                    cache: false,
+                                    success: function (str) {
+                                        if (str.code === 0) {
+                                            table.reload('table-load');
+                                        }
+                                        layer.msg(str.msg, {icon: str.icon, anim: str.anim});
+                                    }
+                                });
+                                layer.close(index);//关闭弹窗
+                            });
+                            submit.trigger('click');
+                        },
+                        success: function (layero, index) {
+                        }
+                    });
+                    break;
+                case 'del':
+                    layer.confirm('确认要删除本条药品进货记录吗？', function (index) {
+                        $.ajax({
+                            url: '/drugInInfo/drugInInfoDelById?id=' + data.id,
+                            data: null,
+                            async: false,
+                            cache: false,
+                            success: function (str) {
+                                table.reload('table-load');
+                                layer.msg(str.msg, {icon: str.icon, anim: str.anim});
+                            }
+                        });
+                    });
+                    break;
+            }
+        });
+    });
+</script>
+
+</html>

@@ -98,4 +98,13 @@ public interface DrugInfoService extends IService<DrugInfo> {
      * @Date: 2022/4/18
      */
     int selectStock(String dname);
+
+    /**
+     * @Description: 根据药品名字查询药品信息
+     * @param: [dname]
+     * @return: com.xiecode.drug.pojo.DrugInfo
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    DrugInfo selectDrugInfoByDname(String dname);
 }

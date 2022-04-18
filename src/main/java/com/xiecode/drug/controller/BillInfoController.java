@@ -1,10 +1,14 @@
 package com.xiecode.drug.controller;
 
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.xiecode.drug.common.OrderCoderUtil;
 import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.BillInfo;
+import com.xiecode.drug.pojo.DrugInInfo;
+import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.service.BillInfoService;
+import com.xiecode.drug.service.DrugInInfoService;
+import com.xiecode.drug.service.DrugInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +29,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class BillInfoController {
     @Autowired
     private BillInfoService billInfoService;
+
+    @Autowired
+    private DrugInfoService drugInfoService;
+
+    @Autowired
+    private DrugInInfoService drugInInfoService;
 
 
     /**
@@ -84,10 +94,31 @@ public class BillInfoController {
     @ResponseBody
     public Object billInfoAdd(BillInfo billInfo) {
         try {
+            //获取药的信息
+            DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(billInfo.getDname());
+            //获取药品进货信息中最大的id
+            int id = drugInInfoService.selectMaxID();
+            //添加账单的同时更新药品进货信息
+            DrugInInfo drugInInfo = new DrugInInfo();
+            drugInInfo.setName(drugInfo.getName());
+            drugInInfo.setSupplier(drugInfo.getSupplier());
+            drugInInfo.setWarranty(drugInfo.getWarrenty());
+            drugInInfo.setDruginnum(OrderCoderUtil.getOrderCode((long) id));
+            drugInInfo.setDruginprice(billInfo.getCount() * drugInfo.getPrice());
+            drugInInfo.setDrugcount(billInfo.getCount());
+            drugInInfo.setIntime(billInfo.getBuyTime());
+            int insert = drugInInfoService.insert(drugInInfo);
+            billInfo.setSname(drugInfo.getSupplier());
+            billInfo.setTotal(drugInInfo.getDruginprice());
+            if (insert == 0) {
+                return ResultMapUtil.getFailInsert();
+            }
             int i = billInfoService.addBillInfo(billInfo);
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResultMapUtil.getHashMapException(e);
+
         }
 
     }

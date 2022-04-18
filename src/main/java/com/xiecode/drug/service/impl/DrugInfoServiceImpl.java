@@ -150,5 +150,18 @@ public class DrugInfoServiceImpl extends ServiceImpl<DrugInfoMapper, DrugInfo> i
         return drugInfoMapper.selectStock(dname);
     }
 
+    /**
+     * @param dname
+     * @Description: 根据药品名字查询药品信息
+     * @param: [dname]
+     * @return: com.xiecode.drug.pojo.DrugInfo
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    @Override
+    public DrugInfo selectDrugInfoByDname(String dname) {
+        return drugInfoMapper.selectDrugInfoByDname(dname);
+    }
+
 
 }

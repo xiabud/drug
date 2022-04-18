@@ -11,4 +11,7 @@
     <select id="selectStock" resultType="java.lang.Integer">
         select stock FROM drug_info WHERE name = #{dName}
     </select>
+    <select id="selectDrugInfoByDname" resultType="com.xiecode.drug.pojo.DrugInfo">
+        select * from drug_info WHERE name = #{dName}
+    </select>
 </mapper>
