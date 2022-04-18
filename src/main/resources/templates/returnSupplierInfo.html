@@ -99,6 +99,7 @@
                             //监听提交
                             iframeWindow.layui.form.on('submit(LAY-from-submit)', function (data) {
                                 var filed = data.field;
+                                console.log(filed);
                                 $.ajax({
                                     url: '/returnSupplierInfo/returnSupplierInfoAdd',
                                     data: filed,

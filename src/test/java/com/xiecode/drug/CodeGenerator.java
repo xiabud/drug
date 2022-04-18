@@ -125,7 +125,7 @@ public class CodeGenerator {
         // 写于父类中的公共字段
         //strategy.setSuperEntityColumns("id");
         //strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
-        strategy.setInclude("return_goods_info");
+        strategy.setInclude("drug_in_info");
         strategy.setControllerMappingHyphenStyle(true);
         //strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);

@@ -164,6 +164,20 @@ public class DrugInfoController {
         return ResultMapUtil.getHashMapList(drugList);
     }
 
+    /**
+     * @Description: 根据供应商名称获取所有的药品名称
+     * @param: []
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/4/16
+     */
+    @RequestMapping("/drugInfoListBySName")
+    @ResponseBody
+    public Object drugInfoListBySName(String sname) {
+        List<DrugInfo> drugList = druginfoService.drugInfoListBySName(sname);
+        return ResultMapUtil.getHashMapList(drugList);
+    }
+
 
     @RequestMapping("/warranty")
     public Object warranty() {

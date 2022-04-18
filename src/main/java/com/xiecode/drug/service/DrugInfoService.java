@@ -107,4 +107,13 @@ public interface DrugInfoService extends IService<DrugInfo> {
      * @Date: 2022/4/18
      */
     DrugInfo selectDrugInfoByDname(String dname);
+
+    /**
+     * @Description: 根据供应商名称获取所有的药品名称
+     * @param: []
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/4/16
+     */
+    List<DrugInfo> drugInfoListBySName(String sName);
 }

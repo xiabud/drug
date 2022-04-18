@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * <p>
  * 药品信息 Mapper 接口
@@ -32,4 +34,6 @@ public interface DrugInfoMapper extends BaseMapper<DrugInfo> {
     int selectStock(@Param("dName") String dName);
 
     DrugInfo selectDrugInfoByDname(@Param("dName") String dName);
+
+    List<DrugInfo> drugInfoListBySName(@Param("sName") String sName);
 }

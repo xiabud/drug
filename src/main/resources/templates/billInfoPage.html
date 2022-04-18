@@ -95,7 +95,7 @@
             var currentdname = '[[${obj?.dname}]]';
             //获取药品列表
             $.ajax({
-                url: '/billInfo/billInfoList?sname=' + nowsname,
+                url: '/drugInfo/drugInfoListBySName?sname=' + nowsname,
                 dataType: 'json',
                 type: 'post',
                 cache: false,
@@ -104,10 +104,10 @@
                     $('#dname').prepend("<option value=''>请选择<option>");
                     console.log(data);
                     for (var i = 0; i < data.data.length; i++) {
-                        if (data.data[i].dname == currentdname) {
-                            $('#dname').prepend("<option selected value='" + data.data[i].dname + "'>" + data.data[i].dname + "</option>");
+                        if (data.data[i].name == currentdname) {
+                            $('#dname').prepend("<option selected value='" + data.data[i].name + "'>" + data.data[i].name + "</option>");
                         } else {
-                            $('#dname').prepend("<option value='" + data.data[i].dname + "'>" + data.data[i].dname + "</option>");
+                            $('#dname').prepend("<option value='" + data.data[i].name + "'>" + data.data[i].name + "</option>");
                         }
 
                     }

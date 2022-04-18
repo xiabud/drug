@@ -163,5 +163,18 @@ public class DrugInfoServiceImpl extends ServiceImpl<DrugInfoMapper, DrugInfo> i
         return drugInfoMapper.selectDrugInfoByDname(dname);
     }
 
+    /**
+     * @param sName
+     * @Description: 根据供应商名称获取所有的药品名称
+     * @param: []
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/4/16
+     */
+    @Override
+    public List<DrugInfo> drugInfoListBySName(String sName) {
+        return drugInfoMapper.drugInfoListBySName(sName);
+    }
+
 
 }
