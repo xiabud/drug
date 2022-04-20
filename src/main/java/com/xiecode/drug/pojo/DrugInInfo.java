@@ -54,19 +54,38 @@ public class DrugInInfo implements Serializable {
      * 药品进货金额
      */
     @TableField("drugInPrice")
-    private Float druginprice;
+    private Float druginprice = Float.valueOf(0);
 
     /**
      * 药品进货数量
      */
     @TableField("drugCount")
-    private Integer drugcount;
+    private Integer drugcount = 0;
+
+    /**
+     * 药品退货数量
+     */
+    @TableField("drugRetuen")
+    private Integer drugretuen = 0;
+
+    /**
+     * 药品退货金额
+     */
+    @TableField("drugOutPrice")
+    private Float drugoutprice = Float.valueOf(0);
+
 
     /**
      * 药品进货时间
      */
     @TableField("inTime")
     private Date intime;
+
+    /**
+     * 药品退货时间
+     */
+    @TableField("outTime")
+    private Date outtime;
 
 
 }

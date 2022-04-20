@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.DrugInInfoMapper">
+    <update id="updatebyDruginnum">
+        Update drug_in_info Set drugRetuen = drugRetuen + ${drugretuen},outTime = #{outtime},drugOutPrice = drugOutPrice + #{drugoutprice} Where drugInNum = #{druginnum}
+    </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer">
         SELECT MAX(id) FROM drug_in_info
+    </select>
+    <select id="drugInInfoListByDrugName" resultType="com.xiecode.drug.pojo.DrugInInfo">
+        select * from drug_in_info where name = #{dname}
     </select>
 </mapper>

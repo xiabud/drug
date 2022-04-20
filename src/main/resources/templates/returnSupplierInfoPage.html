@@ -16,25 +16,20 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">药品名称</label>
                     <div class="layui-input-block">
-                        <select name="dname" id="dname" ></select>
+                        <select name="dname" id="dname" lay-filter="dname"></select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">药品批号</label>
+                    <div class="layui-input-block">
+                        <select name="druginnum" id="druginnum" lay-filter="druginnum"></select>
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">数量</label>
                     <div class="layui-input-block">
-                        <input type="text" name="dcount" th:value="${obj?.dcount}" lay-verify="required" placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">供应商</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="supplierName" th:value="${obj?.supplierName}" lay-verify="required" placeholder="请输入供应商" autocomplete="off" class="layui-input">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">进货时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" readonly name="buyTime" id="buyTime" th:value="${obj?.buyTime}" lay-verify="required" placeholder="请输入进货时间" autocomplete="off" class="layui-input">
+                        <input type="text" name="dcount" th:value="${obj?.dcount}" lay-verify="required"
+                               placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -66,12 +61,6 @@
 
         //支持日期控件
         laydate.render({
-            elem: '#buyTime',
-            trigger: 'click'
-        });
-
-        //支持日期控件
-        laydate.render({
             elem: '#createTime',
             trigger: 'click'
         });
@@ -90,14 +79,42 @@
                     if (data.data[i].name == currentdname) {
                         $('#dname').prepend("<option selected value='" + data.data[i].name + "'>" + data.data[i].name + "");
                     } else {
-                        $('#dname').prepend("<option value='"+data.data[i].name+"'>"+data.data[i].name+"");
+                        $('#dname').prepend("<option value='" + data.data[i].name + "'>" + data.data[i].name + "");
                     }
 
                 }
-
                 //下拉列表渲染
                 form.render();
             }
+        });
+        form.on('select(dname)', function (d) {
+            console.log(d.value); //得到被选中的值
+            var nowdname = d.value;
+            //当前药品的值
+            var currentdruginnum = '[[${obj?.dname}]]';
+            //获取药品编号列表
+            $.ajax({
+                url: '/drugInInfo/drugInInfoListByDrugName?dname=' + nowdname,
+                dataType: 'json',
+                type: 'post',
+                cache: false,
+                success: function (data) {
+                    $('#druginnum').empty();
+                    $('#druginnum').prepend("<option value=''>请选择<option>");
+                    console.log(data);
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].druginnum == currentdruginnum) {
+                            $('#druginnum').prepend("<option selected value='" + data.data[i].druginnum + "'>" + data.data[i].druginnum + "</option>");
+                        } else {
+                            $('#druginnum').prepend("<option value='" + data.data[i].druginnum + "'>" + data.data[i].druginnum + "</option>");
+                        }
+
+                    }
+                    data = undefined;
+                    //下拉列表渲染
+                    form.render();
+                }
+            });
         })
 
     });

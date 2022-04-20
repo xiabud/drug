@@ -3,6 +3,8 @@ package com.xiecode.drug.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xiecode.drug.pojo.DrugInInfo;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper 接口
@@ -14,4 +16,8 @@ import com.xiecode.drug.pojo.DrugInInfo;
 public interface DrugInInfoMapper extends BaseMapper<DrugInInfo> {
 
     int selectMaxID();
+
+    List<DrugInInfo> drugInInfoListByDrugName(String dname);
+
+    int updatebyDruginnum(DrugInInfo drugOutInfo);
 }

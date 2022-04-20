@@ -42,15 +42,16 @@ public class ReturnSupplierInfo implements Serializable {
     private Integer dcount;
 
     /**
+     * 药品进货批号
+     */
+    @TableField("drugInNum")
+    private String druginnum;
+
+    /**
      * 供应商名称
      */
     private String supplierName;
 
-    /**
-     * 购买时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date buyTime;
 
     /**
      * 退货原因
@@ -73,13 +74,5 @@ public class ReturnSupplierInfo implements Serializable {
         return DateUtil.dataConvert(createTime);
     }
 
-    /**
-     * 操作时间转换为年月日
-     */
-    @TableField(exist = false)
-    private String buyTimeStr;
-    public String getBuyTime() {
-        return DateUtil.dataConvert(buyTime);
-    }
 
 }

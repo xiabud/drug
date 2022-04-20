@@ -43,7 +43,7 @@ public class BillInfoServiceImpl extends ServiceImpl<BillInfoMapper, BillInfo> i
         QueryWrapper<BillInfo> queryWrapper = new QueryWrapper<>();
         if (StringUtils.isNotEmpty(param)) {
             //根据供应商名称精确查询
-            queryWrapper.eq("sname", param);
+            queryWrapper.like("sname", param);
         }
         Page<BillInfo> page = new Page<>(pageNum,pageSize);
         return billInfoMapper.selectPage(page,queryWrapper);

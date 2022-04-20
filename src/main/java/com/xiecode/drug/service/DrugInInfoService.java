@@ -88,4 +88,22 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
      * @Date: 2022/4/18
      */
     int insert(DrugInInfo drugInInfo);
+
+    /**
+     * @Description: 获取所有的药品进货的进货编码
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    List<DrugInInfo> drugInInfoListByDrugName(String dname);
+
+    /**
+     * @Description: 更新药品进货单的数据通过药品单号
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    int updatebyDruginnum(DrugInInfo drugOutInfo);
 }

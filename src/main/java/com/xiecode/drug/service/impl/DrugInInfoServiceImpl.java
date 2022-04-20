@@ -135,4 +135,29 @@ public class DrugInInfoServiceImpl extends ServiceImpl<DrugInInfoMapper, DrugInI
     public int insert(DrugInInfo drugInInfo) {
         return drugInInfoMapper.insert(drugInInfo);
     }
+
+    /**
+     * @Description: 获取所有的药品进货的进货编码
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    @Override
+    public List<DrugInInfo> drugInInfoListByDrugName(String dname) {
+        return drugInInfoMapper.drugInInfoListByDrugName(dname);
+    }
+
+    /**
+     * @param drugOutInfo
+     * @Description: 更新药品进货单的数据通过药品单号
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    @Override
+    public int updatebyDruginnum(DrugInInfo drugOutInfo) {
+        return drugInInfoMapper.updatebyDruginnum(drugOutInfo);
+    }
 }

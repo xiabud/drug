@@ -60,15 +60,9 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
+                    {field: 'druginnum', title: '药品编号', align: 'center'},
                     {field: 'dcount', title: '退货数量', align: 'center'},
                     {field: 'supplierName', title: '供应商名称', align: 'center'},
-                    {
-                        field: 'buytime',
-                        title: '进货时间',
-                        width: 250,
-                        align: 'center',
-                        templet: "<div>{{layui.util.toDateString(d.buyTime,'yyyy-MM-dd')}}</div>"
-                    },
                     {field: 'reason', title: '退货原因', align: 'center'},
                     {
                         field: 'createtime',

@@ -1,9 +1,11 @@
 package com.xiecode.drug.controller;
-
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
+import com.xiecode.drug.pojo.DrugInInfo;
+import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.pojo.ReturnSupplierInfo;
+import com.xiecode.drug.service.DrugInInfoService;
+import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.ReturnSupplierInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,12 @@ public class ReturnSupplierInfoController {
 
     @Autowired
     private ReturnSupplierInfoService returnSupplierInfoService;
+
+    @Autowired
+    private DrugInfoService drugInfoService;
+
+    @Autowired
+    private DrugInInfoService drugInInfoService;
 
 
     /**
@@ -85,9 +93,22 @@ public class ReturnSupplierInfoController {
     @ResponseBody
     public Object returnSupplierInfoAdd(ReturnSupplierInfo returnSupplierInfo) {
         try {
+            System.out.println(returnSupplierInfo);
+            DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(returnSupplierInfo.getDname());
+            returnSupplierInfo.setSupplierName(drugInfo.getSupplier());
             int i = returnSupplierInfoService.addReturnSupplierInfo(returnSupplierInfo);
+            DrugInInfo drugOutInfo = new DrugInInfo();
+            drugOutInfo.setName(returnSupplierInfo.getDname());
+            drugOutInfo.setSupplier(returnSupplierInfo.getSupplierName());
+            drugOutInfo.setWarranty(drugInfo.getWarrenty());
+            drugOutInfo.setDruginnum(returnSupplierInfo.getDruginnum());
+            drugOutInfo.setDrugretuen(returnSupplierInfo.getDcount());
+            drugOutInfo.setDrugoutprice(returnSupplierInfo.getDcount() * drugInfo.getPrice());
+            drugOutInfo.setOuttime(returnSupplierInfo.getCreateTime());
+            int j = drugInInfoService.updatebyDruginnum(drugOutInfo);
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResultMapUtil.getHashMapException(e);
         }
 
