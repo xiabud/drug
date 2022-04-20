@@ -110,6 +110,7 @@ public class BillInfoController {
             drugInInfo.setDrugcount(billInfo.getCount());
             drugInInfo.setIntime(billInfo.getBuyTime());
             int insert = drugInInfoService.insert(drugInInfo);
+            billInfo.setDruginnum(drugInInfo.getDruginnum());
             billInfo.setSname(drugInfo.getSupplier());
             billInfo.setTotal(drugInInfo.getDruginprice());
             if (insert == 0) {

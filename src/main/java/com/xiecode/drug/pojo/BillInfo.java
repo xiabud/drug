@@ -52,6 +52,12 @@ public class BillInfo implements Serializable {
     private Float total;
 
     /**
+     * 药品进货批号
+     */
+    @TableField("drugInNum")
+    private String druginnum;
+
+    /**
      * 进货时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -59,7 +65,7 @@ public class BillInfo implements Serializable {
 
     /**
      * 将进货时间转换成年月日
-     * */
+     */
     @TableField(exist = false)
     private String buyTimeSimpleDateFormat;
     public String getBuyTimeSimpleDateFormat() {
