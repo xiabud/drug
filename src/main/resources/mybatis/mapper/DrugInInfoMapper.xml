@@ -4,6 +4,9 @@
     <update id="updatebyDruginnum">
         Update drug_in_info Set drugRetuen = drugRetuen + ${drugretuen},outTime = #{outtime},drugOutPrice = drugOutPrice + #{drugoutprice} Where drugInNum = #{druginnum}
     </update>
+    <update id="updateDrugCountByDruginnum">
+        Update drug_in_info Set drugCount = drugCount - ${drugCount} Where drugInNum = #{druginnum}
+    </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer">
         SELECT MAX(id) FROM drug_in_info

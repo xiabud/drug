@@ -160,4 +160,18 @@ public class DrugInInfoServiceImpl extends ServiceImpl<DrugInInfoMapper, DrugInI
     public int updatebyDruginnum(DrugInInfo drugOutInfo) {
         return drugInInfoMapper.updatebyDruginnum(drugOutInfo);
     }
+
+    /**
+     * @param drugOutInfo
+     * @Description: 根据进货编号来更新库存
+     * @param: []
+     * @return: void
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    @Override
+    public int updateDrugCountByDruginnum(DrugInInfo drugOutInfo) {
+        return drugInInfoMapper.updateDrugCountByDruginnum(drugOutInfo);
+    }
+
 }

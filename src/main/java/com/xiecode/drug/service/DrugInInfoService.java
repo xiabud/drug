@@ -106,4 +106,13 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
      * @Date: 2022/4/20
      */
     int updatebyDruginnum(DrugInInfo drugOutInfo);
+
+    /**
+     * @Description: 根据进货编号来更新库存
+     * @param: []
+     * @return: void
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    int updateDrugCountByDruginnum(DrugInInfo drugOutInfo);
 }

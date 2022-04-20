@@ -3,7 +3,11 @@ package com.xiecode.drug.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
+import com.xiecode.drug.pojo.DrugInInfo;
+import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.pojo.DrugProblemInfo;
+import com.xiecode.drug.service.DrugInInfoService;
+import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.DrugProblemInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +31,11 @@ import java.util.Date;
 public class DrugProblemInfoController {
     @Autowired
     private DrugProblemInfoService drugProblemInfoService;
+
+    @Autowired
+    private DrugInfoService drugInfoService;
+
+    private DrugInInfoService drugInInfoService;
 
 
     /**
@@ -86,8 +95,13 @@ public class DrugProblemInfoController {
     @ResponseBody
     public Object drugProblemInfoAdd(DrugProblemInfo drugProblemInfo) {
         try {
+            DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(drugProblemInfo.getDname());
             drugProblemInfo.setCreateTime(new Date());
+            drugProblemInfo.setDprice(drugInfo.getPrice());
+            DrugInInfo drugInInfo = new DrugInInfo();
+
             int i = drugProblemInfoService.addDrugProblemInfo(drugProblemInfo);
+
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);

@@ -60,8 +60,8 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
+                    {field: 'druginnum', title: '药品批号', align: 'center'},
                     {field: 'dcount', title: '问题药品数量', align: 'center'},
-                    {field: 'dprice', title: '药品单价', align: 'center'},
                     {field: 'reason', title: '出问题的原因', align: 'center'},
                     {
                         field: 'create_time',
@@ -70,7 +70,7 @@
                         align: 'center',
                         templet: "<div>{{layui.util.toDateString(d.createTime,'yyyy-MM-dd HH:mm:ss')}}</div>"
                     },
-                    {title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
+                    {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}
                 ]
             ]
         });
@@ -84,7 +84,7 @@
                         title: '新增问题药品信息信息',
                         content: '/drugProblemInfo/drugProblemInfoPage',
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '400px'],
+                        area: ['600px', '500px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];
@@ -134,9 +134,9 @@
                     layer.open({
                         type: 2,
                         title: '编辑问题药品信息',
-                        content: '/drugProblemInfo/drugProblemInfoQueryById?id='+data.id,
+                        content: '/drugProblemInfo/drugProblemInfoQueryById?id=' + data.id,
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '400px'],
+                        area: ['600px', '500px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];
