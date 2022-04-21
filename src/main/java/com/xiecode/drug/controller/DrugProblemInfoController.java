@@ -3,7 +3,6 @@ package com.xiecode.drug.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
-import com.xiecode.drug.pojo.DrugInInfo;
 import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.pojo.DrugProblemInfo;
 import com.xiecode.drug.service.DrugInInfoService;
@@ -98,10 +97,7 @@ public class DrugProblemInfoController {
             DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(drugProblemInfo.getDname());
             drugProblemInfo.setCreateTime(new Date());
             drugProblemInfo.setDprice(drugInfo.getPrice());
-            DrugInInfo drugInInfo = new DrugInInfo();
-
             int i = drugProblemInfoService.addDrugProblemInfo(drugProblemInfo);
-
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);

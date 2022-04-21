@@ -4,7 +4,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xiecode.drug.mapper.DrugInInfoMapper;
 import com.xiecode.drug.mapper.DrugProblemInfoMapper;
+import com.xiecode.drug.pojo.DrugInInfo;
 import com.xiecode.drug.pojo.DrugProblemInfo;
 import com.xiecode.drug.service.DrugProblemInfoService;
 import org.apache.commons.lang3.StringUtils;
@@ -28,6 +30,8 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
     private DrugProblemInfoMapper drugProblemInfoMapper;
 
 
+    @Resource
+    private DrugInInfoMapper drugInInfoMapper;
 
 
     /**
@@ -52,7 +56,7 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
 
     /**
      * @param drugProblemInfo
-     * @Description: 新增一条问题药品信息
+     * @Description: 新增一条问题药品信息, 同时会减少药品的库存。
      * @param: [drugProblemInfo]
      * @return: int
      * @Author: Xiewc
@@ -60,6 +64,10 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
      */
     @Override
     public int addDrugProblemInfo(DrugProblemInfo drugProblemInfo) {
+        DrugInInfo drugInInfo = new DrugInInfo();
+        drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
+        drugInInfo.setDrugcount(drugProblemInfo.getDcount());
+        drugInInfoMapper.updateDrugCountByDruginnum(drugInInfo);
         return drugProblemInfoMapper.insert(drugProblemInfo);
     }
 
