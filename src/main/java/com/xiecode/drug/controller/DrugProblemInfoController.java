@@ -98,7 +98,7 @@ public class DrugProblemInfoController {
             drugProblemInfo.setCreateTime(new Date());
             drugProblemInfo.setDprice(drugInfo.getPrice());
             int i = drugProblemInfoService.addDrugProblemInfo(drugProblemInfo);
-            return ResultMapUtil.getHashMapSave(i);
+            return ResultMapUtil.returnDrugSave(i);
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);
         }

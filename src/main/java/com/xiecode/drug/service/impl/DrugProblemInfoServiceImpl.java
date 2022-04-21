@@ -64,11 +64,22 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
      */
     @Override
     public int addDrugProblemInfo(DrugProblemInfo drugProblemInfo) {
-        DrugInInfo drugInInfo = new DrugInInfo();
-        drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
-        drugInInfo.setDrugcount(drugProblemInfo.getDcount());
-        drugInInfoMapper.updateDrugCountByDruginnum(drugInInfo);
-        return drugProblemInfoMapper.insert(drugProblemInfo);
+        //查询药品库存
+        int druginnum = drugInInfoMapper.selectDrugCountByDruginnum(drugProblemInfo.getDruginnum());
+        int i = 0;
+        int insert = 0;
+        if (druginnum >= drugProblemInfo.getDcount()) {
+            DrugInInfo drugInInfo = new DrugInInfo();
+            drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
+            drugInInfo.setDrugcount(drugProblemInfo.getDcount());
+            i = drugInInfoMapper.updateDrugCountByDruginnum(drugInInfo);
+            insert = drugProblemInfoMapper.insert(drugProblemInfo);
+        }
+        int flag = 0;
+        if (i == 1 && insert == 1) {
+            flag = 1;
+        }
+        return flag;
     }
 
     /**

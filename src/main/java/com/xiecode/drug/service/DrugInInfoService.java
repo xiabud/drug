@@ -115,4 +115,13 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
      * @Date: 2022/4/20
      */
     int updateDrugCountByDruginnum(DrugInInfo drugOutInfo);
+
+    /**
+     * @Description: 根据药品进货批号来查询药品数量
+     * @param: [druginnum]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/21
+     */
+    int selectDrugCountByDruginnum(String druginnum);
 }
