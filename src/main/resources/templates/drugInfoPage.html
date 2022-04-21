@@ -20,9 +20,10 @@
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">药品编码</label>
+                    <label class="layui-form-label">批准文号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="dnumber" th:value="${obj?.dnumber}" lay-verify="required" placeholder="请输入药品编码" autocomplete="off" class="layui-input">
+                        <input type="text" name="dnumber" th:value="${obj?.dnumber}" lay-verify="required"
+                               placeholder="请输入批准文号" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -35,12 +36,6 @@
                     <label class="layui-form-label">供应商</label>
                     <div class="layui-input-block">
                         <select name="supplier" id="supplier" ></select>
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">生产时间</label>
-                    <div class="layui-input-block">
-                        <input type="text" readonly name="productTime" id="productTime" th:value="${obj?.productTimeSimpleDateFormat}" lay-verify="required" placeholder="请输入药品的生产时间" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

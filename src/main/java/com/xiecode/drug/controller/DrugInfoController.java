@@ -88,8 +88,13 @@ public class DrugInfoController {
     @ResponseBody
     public Object drugInfoAdd(DrugInfo druginfo) {
         try {
-            int i = druginfoService.addDrugInfo(druginfo);
-            return ResultMapUtil.getHashMapSave(i);
+            //检查药品名称是否已经在药品信息单中存在，如果存在，则药品更新不成功
+            DrugInfo drugName = druginfoService.selectDrugInfoByDname(druginfo.getName());
+            int i = 0;
+            if (drugName == null) {
+                i = druginfoService.addDrugInfo(druginfo);
+            }
+            return ResultMapUtil.insertDrugInfo(i);
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);
         }

@@ -3,6 +3,7 @@ package com.xiecode.drug.pojo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xiecode.drug.common.DateUtil;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -44,6 +45,7 @@ public class DrugInfo implements Serializable {
     /**
      * 生产时间
      */
+    @JsonIgnore
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date productTime;
 
@@ -71,6 +73,7 @@ public class DrugInfo implements Serializable {
     /**
     * 将生产时间转换成年月日
     * */
+    @JsonIgnore
     @TableField(exist = false)
     private String productTimeSimpleDateFormat;
     public String getProductTimeSimpleDateFormat() {

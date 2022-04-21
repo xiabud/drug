@@ -100,7 +100,7 @@ public class BillInfoController {
             DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(billInfo.getDname());
             //获取药品进货信息中最大的id
             int id = drugInInfoService.selectMaxID();
-            //添加账单的同时更新药品进货信息
+            //添加账单的同时更新药品库存信息
             DrugInInfo drugInInfo = new DrugInInfo();
             drugInInfo.setName(drugInfo.getName());
             drugInInfo.setSupplier(drugInfo.getSupplier());
@@ -113,8 +113,13 @@ public class BillInfoController {
             billInfo.setDruginnum(drugInInfo.getDruginnum());
             billInfo.setSname(drugInfo.getSupplier());
             billInfo.setTotal(drugInInfo.getDruginprice());
+            //更新药品库存信息同时更新药品信息的库存
+            int i1 = drugInfoService.updateAddStock(drugInInfo.getDrugcount(), drugInfo.getName());
+            if (i1 == 0) {
+                return ResultMapUtil.getFailInsertDrugInfo();
+            }
             if (insert == 0) {
-                return ResultMapUtil.getFailInsert();
+                return ResultMapUtil.getFailInsertDrugInInfo();
             }
             int i = billInfoService.addBillInfo(billInfo);
             return ResultMapUtil.getHashMapSave(i);

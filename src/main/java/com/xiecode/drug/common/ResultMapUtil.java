@@ -86,12 +86,51 @@ public class ResultMapUtil {
      * @Author: Xiewc
      * @Date: 2022/4/18
      */
-    public static HashMap<String, Object> getFailInsert() {
+    public static HashMap<String, Object> getFailInsertDrugInInfo() {
         HashMap<String, Object> resultMap = new HashMap<>();
-        resultMap.put("msg", "保存失败,更新药品进货单失败！");
+        resultMap.put("msg", "保存失败,更新药品库存信息单失败！");
         resultMap.put("code", 1);
         resultMap.put("icon", 5);
         resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
+     * @Description: 插入药品进货单失败
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    public static HashMap<String, Object> getFailInsertDrugInfo() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "保存失败,更新药品信息单失败！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
+     * @Description: 判断是否新增保存成功药品信息
+     * @param: [i]
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/3/1
+     */
+    public static HashMap<String, Object> insertDrugInfo(int i) {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (i == 0) {
+            resultMap.put("msg", "保存失败,可能是药品信息中已存在此药品");
+            resultMap.put("code", 1);
+            resultMap.put("icon", 5);
+            resultMap.put("anim", 6);
+        } else {
+            resultMap.put("msg", "保存成功");
+            resultMap.put("code", 0);
+            resultMap.put("icon", 1);
+            resultMap.put("anim", 4);
+        }
         return resultMap;
     }
 
