@@ -185,5 +185,28 @@ public class ResultMapUtil {
         return resultMap;
     }
 
+    /**
+     * @Description: 保存成功统一返回格式
+     * @param: [i]
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/3/1
+     */
+    public static HashMap<String, Object> returnSupplierResultMap(int i) {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (i == 0) {
+            resultMap.put("msg", "保存失败,退货数量大于药品库存");
+            resultMap.put("code", 1);
+            resultMap.put("icon", 5);
+            resultMap.put("anim", 6);
+        } else {
+            resultMap.put("msg", "保存成功");
+            resultMap.put("code", 0);
+            resultMap.put("icon", 1);
+            resultMap.put("anim", 4);
+        }
+        return resultMap;
+    }
+
 
 }

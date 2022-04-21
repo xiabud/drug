@@ -65,10 +65,10 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
     @Override
     public int addDrugProblemInfo(DrugProblemInfo drugProblemInfo) {
         //查询药品库存
-        int druginnum = drugInInfoMapper.selectDrugCountByDruginnum(drugProblemInfo.getDruginnum());
+        int drugcount = drugInInfoMapper.selectDrugCountByDruginnum(drugProblemInfo.getDruginnum());
         int i = 0;
         int insert = 0;
-        if (druginnum >= drugProblemInfo.getDcount()) {
+        if (drugcount >= drugProblemInfo.getDcount()) {
             DrugInInfo drugInInfo = new DrugInInfo();
             drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
             drugInInfo.setDrugcount(drugProblemInfo.getDcount());

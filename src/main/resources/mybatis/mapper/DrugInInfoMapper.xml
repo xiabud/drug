@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.DrugInInfoMapper">
     <update id="updatebyDruginnum">
-        Update drug_in_info Set drugRetuen = drugRetuen + ${drugretuen},outTime = #{outtime},drugOutPrice = drugOutPrice + #{drugoutprice} Where drugInNum = #{druginnum}
+        Update drug_in_info Set drugRetuen = drugRetuen + ${drugretuen},drugCount = drugCount - ${drugretuen},outTime = #{outtime},drugOutPrice = drugOutPrice + #{drugoutprice} Where drugInNum = #{druginnum}
     </update>
     <update id="updateDrugCountByDruginnum">
         Update drug_in_info Set drugCount = drugCount - ${drugcount} Where drugInNum = #{druginnum}

@@ -158,7 +158,12 @@ public class DrugInInfoServiceImpl extends ServiceImpl<DrugInInfoMapper, DrugInI
      */
     @Override
     public int updatebyDruginnum(DrugInInfo drugOutInfo) {
-        return drugInInfoMapper.updatebyDruginnum(drugOutInfo);
+        int i = drugInInfoMapper.selectDrugCountByDruginnum(drugOutInfo.getDruginnum());
+        int j = 0;
+        if (i >= drugOutInfo.getDrugretuen()) {
+            j = drugInInfoMapper.updatebyDruginnum(drugOutInfo);
+        }
+        return j;
     }
 
     /**

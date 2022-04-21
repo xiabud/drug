@@ -106,7 +106,11 @@ public class ReturnSupplierInfoController {
             drugOutInfo.setDrugoutprice(returnSupplierInfo.getDcount() * drugInfo.getPrice());
             drugOutInfo.setOuttime(returnSupplierInfo.getCreateTime());
             int j = drugInInfoService.updatebyDruginnum(drugOutInfo);
-            return ResultMapUtil.getHashMapSave(i);
+            int k = 0;
+            if (i == 1 && j == 1) {
+                k = 1;
+            }
+            return ResultMapUtil.returnSupplierResultMap(k);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResultMapUtil.getHashMapException(e);
