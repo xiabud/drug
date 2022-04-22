@@ -2,7 +2,7 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品售完信息</title>
+    <title>药品出库完信息</title>
     <!--引入本地的css和js-->
     <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
     <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
@@ -19,7 +19,7 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">药品售完信息</div>
+                <div class="layui-card-header">药品出库完信息</div>
                 <div class="layui-card-body">
                     <table class="layui-hide" id="main-table" lay-filter="main-table"></table>
                     <script type="text/html" id="toolbarDemo">
@@ -62,7 +62,7 @@
                     {field: 'name', title: '药品名称', align: 'center'},
                     {field: 'supplier', title: '供应商', align: 'center'},
                     {field: 'druginnum', title: '药品批号', width: 150, align: 'center'},
-                    {field: 'sellnnum', title: '销售数量', align: 'center'},
+                    {field: 'sellnnum', title: '出库数量', align: 'center'},
                     {field: 'returnnum', title: '退货数量', align: 'center'},
                     {title: '销售率检查', align: 'center', width: 190, templet: isExpire},
                     {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}

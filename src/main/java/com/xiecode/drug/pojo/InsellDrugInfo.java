@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * <p>
@@ -54,7 +54,7 @@ public class InsellDrugInfo implements Serializable {
      * 生产日期
      */
     @TableField("pTime")
-    private LocalDateTime ptime;
+    private Date ptime;
 
     /**
      * 已销售数量

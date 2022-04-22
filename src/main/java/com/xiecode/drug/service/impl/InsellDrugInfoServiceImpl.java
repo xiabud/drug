@@ -113,7 +113,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
     }
 
     /**
-     * @Description: 查询药品进货表中最大的ID
+     * @Description: 查询药品在售信息表中最大的ID
      * @param: []
      * @return: int
      * @Author: Xiewc
@@ -126,7 +126,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
 
     /**
      * @param insellDrugInfo
-     * @Description: 新增药品进货表
+     * @Description: 新增药品在售信息表
      * @param: [insellDrugInfo]
      * @return: void
      * @Author: Xiewc
@@ -138,7 +138,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
     }
 
     /**
-     * @Description: 获取所有的药品进货的进货编码
+     * @Description: 获取所有的药品在售信息的进货编码
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
@@ -151,7 +151,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
 
     /**
      * @param drugOutInfo
-     * @Description: 更新药品进货单的数据通过药品单号
+     * @Description: 更新药品在售信息单的数据通过药品单号
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
@@ -159,14 +159,13 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
      */
     @Override
     public int updatebyDruginnum(InsellDrugInfo drugOutInfo) {
-        int i = insellDrugInfoMapper.selectDrugCountByDruginnum(drugOutInfo.getInnum());
         int j = 0;
         return j;
     }
 
     /**
      * @param drugOutInfo
-     * @Description: 根据进货编号来更新库存
+     * @Description: 更新药品在售信息的库存（增加）
      * @param: []
      * @return: void
      * @Author: Xiewc
@@ -179,14 +178,14 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
 
     /**
      * @param
-     * @Description: 根据进货编号来更新库存
+     * @Description: 根据药品在售信息批号来查询药品信息
      * @param: []
      * @return: void
      * @Author: Xiewc
      * @Date: 2022/4/21
      */
     @Override
-    public int selectDrugCountByDruginnum(String druginnum) {
+    public InsellDrugInfo selectDrugCountByDruginnum(String druginnum) {
         return insellDrugInfoMapper.selectDrugCountByDruginnum(druginnum);
     }
 }

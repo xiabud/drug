@@ -72,7 +72,7 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
 
 
     /**
-     * @Description: 查询药品进货表中最大的ID
+     * @Description: 查询药品在售信息表中最大的ID
      * @param: []
      * @return: int
      * @Author: Xiewc
@@ -81,7 +81,7 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     int selectMaxID();
 
     /**
-     * @Description: 新增药品进货表
+     * @Description: 新增药品在售信息表
      * @param: [insellDrugInfo]
      * @return: void
      * @Author: Xiewc
@@ -90,7 +90,7 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     int insert(InsellDrugInfo insellDrugInfo);
 
     /**
-     * @Description: 获取所有的药品进货的进货编码
+     * @Description: 获取所有的药品在售信息的进货编码
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
@@ -99,7 +99,7 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     List<InsellDrugInfo> insellDrugInfoListByDrugName(String dname);
 
     /**
-     * @Description: 更新药品进货单的数据通过药品单号
+     * @Description: 更新药品在售信息单的数据通过药品单号
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
@@ -117,11 +117,11 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     int updateDrugCountByDruginnum(InsellDrugInfo drugOutInfo);
 
     /**
-     * @Description: 根据药品进货批号来查询药品数量
+     * @Description: 根据药品在售信息批号来查询药品信息
      * @param: [druginnum]
      * @return: int
      * @Author: Xiewc
      * @Date: 2022/4/21
      */
-    int selectDrugCountByDruginnum(String druginnum);
+    InsellDrugInfo selectDrugCountByDruginnum(String druginnum);
 }

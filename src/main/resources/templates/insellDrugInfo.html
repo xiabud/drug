@@ -61,7 +61,7 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
-                    {field: 'innum', title: '药品批号', align: 'center'},
+                    {field: 'innum', title: '药品批号', idth: 150, align: 'center'},
                     {field: 'sellcount', title: '在售数量', align: 'center'},
                     {field: 'warranty', title: '保质期(月)', width: 90, align: 'center'},
                     {
@@ -70,7 +70,8 @@
                         align: 'center',
                         templet: "<div>{{layui.util.toDateString(d.intime,'yyyy-MM-dd')}}</div>"
                     },
-                    {field: 'outprice', title: '进货金额', align: 'center'},
+                    {field: 'sellnum', title: '售出数量', align: 'center'},
+                    {field: 'outprice', title: '售出金额', align: 'center'},
                     {field: 'returnnum', title: '退货数量', align: 'center'},
                     {field: 'inprice', title: '退货金额', align: 'center'},
                     //{title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}

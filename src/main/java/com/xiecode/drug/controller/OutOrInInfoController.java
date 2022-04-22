@@ -1,12 +1,13 @@
 package com.xiecode.drug.controller;
-
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.DrugInInfo;
+import com.xiecode.drug.pojo.DrugInfo;
+import com.xiecode.drug.pojo.InsellDrugInfo;
 import com.xiecode.drug.pojo.OutOrInInfo;
 import com.xiecode.drug.service.DrugInInfoService;
 import com.xiecode.drug.service.DrugInfoService;
+import com.xiecode.drug.service.InsellDrugInfoService;
 import com.xiecode.drug.service.OutOrInInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +38,9 @@ public class OutOrInInfoController {
 
     @Autowired
     private DrugInInfoService drugInInfoService;
+
+    @Autowired
+    private InsellDrugInfoService insellDrugInfoService;
 
     /**
      * @Description: 转向药品出入库页面
@@ -115,7 +119,7 @@ public class OutOrInInfoController {
                     return ResultMapUtil.getStockLess();
                 }
                 outorininfo.setType("发出药品销售：出库");
-                //如果库存足够，则更新药品信息里面的库存
+                //如果库存足够，则更新药品信息里面的库存(不需要更新！)
                 //drugInfoService.updateReduceStock(outorininfo.getCount(), outorininfo.getDname());
                 //减少药品库存里的数量
                 DrugInInfo drugInInfo = new DrugInInfo();
@@ -124,6 +128,26 @@ public class OutOrInInfoController {
                 int i = drugInInfoService.updatereduceDrugCountByDruginnum(drugInInfo);
                 if (i == 0) {
                     return ResultMapUtil.getUpdateStockFail();
+                }
+                DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(outorininfo.getDname());
+
+                //新增药品在售信息表,如果此前已经出库过当前批号的药品，则更新药品在售信息表
+                InsellDrugInfo insellDrugInfo = new InsellDrugInfo();
+                InsellDrugInfo insellDrugInfo1 = insellDrugInfoService.selectDrugCountByDruginnum(outorininfo.getDruginnum());
+                insellDrugInfo.setDname(outorininfo.getDname());
+                insellDrugInfo.setInnum(outorininfo.getDruginnum());
+                insellDrugInfo.setSellcount(outorininfo.getCount());
+                insellDrugInfo.setWarranty(Integer.valueOf(drugInfo.getWarrenty()));
+                insellDrugInfo.setPtime(new Date());
+                if (insellDrugInfo1 != null) {
+                    //如果不为空，则更新在售信息表的数据
+                    insellDrugInfoService.updateDrugCountByDruginnum(insellDrugInfo);
+                } else {
+                    //如果为空，则插入在售信息表的数据
+                    int insert = insellDrugInfoService.insert(insellDrugInfo);
+                    if (insert == 0) {
+                        return ResultMapUtil.getUpdateInSellFail();
+                    }
                 }
             }
             outorininfo.setCreateTime(new Date());

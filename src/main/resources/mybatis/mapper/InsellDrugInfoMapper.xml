@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.InsellDrugInfoMapper">
     <update id="updatebyDruginnum"></update>
-    <update id="updateDrugCountByDruginnum"></update>
+    <update id="updateDrugCountByDruginnum">
+        UPDATE insell_drug_info SET sellcount = sellcount + #{sellcount} WHERE InNum = #{innum}
+    </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer"></select>
     <select id="insellDrugInfoListByDrugName" resultType="com.xiecode.drug.pojo.InsellDrugInfo"></select>
-    <select id="selectDrugCountByDruginnum" resultType="java.lang.Integer"></select>
+    <select id="selectDrugCountByDruginnum" resultType="com.xiecode.drug.pojo.InsellDrugInfo">
+        SELECT * FROM insell_drug_info where InNum = #{druginnum}
+    </select>
 </mapper>
