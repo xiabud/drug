@@ -39,7 +39,7 @@ public class SaleInfo implements Serializable {
     /**
      * 药品编码
      */
-    private String dnumber;
+    private String innum;
 
     /**
      * 销售数量

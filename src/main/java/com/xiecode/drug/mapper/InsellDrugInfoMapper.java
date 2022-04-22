@@ -18,6 +18,14 @@ public interface InsellDrugInfoMapper extends BaseMapper<InsellDrugInfo> {
 
     int selectMaxID();
 
+
+    /**
+     * @Description: 根据药品的名称获取药品的批号
+     * @param: [dname]
+     * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/23
+     */
     List<InsellDrugInfo> insellDrugInfoListByDrugName(String dname);
 
     int updatebyDruginnum(InsellDrugInfo drugOutInfo);

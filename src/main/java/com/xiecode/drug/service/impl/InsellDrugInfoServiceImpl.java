@@ -151,7 +151,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
 
     /**
      * @param drugOutInfo
-     * @Description: 更新药品在售信息单的数据通过药品单号
+     * @Description: 更新药品在售信息单的数据通过药品单号(销售)
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
@@ -159,8 +159,7 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
      */
     @Override
     public int updatebyDruginnum(InsellDrugInfo drugOutInfo) {
-        int j = 0;
-        return j;
+        return insellDrugInfoMapper.updatebyDruginnum(drugOutInfo);
     }
 
     /**

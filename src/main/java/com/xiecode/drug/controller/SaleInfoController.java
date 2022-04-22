@@ -3,7 +3,11 @@ package com.xiecode.drug.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
+import com.xiecode.drug.pojo.DrugInfo;
+import com.xiecode.drug.pojo.InsellDrugInfo;
 import com.xiecode.drug.pojo.SaleInfo;
+import com.xiecode.drug.service.DrugInfoService;
+import com.xiecode.drug.service.InsellDrugInfoService;
 import com.xiecode.drug.service.SaleInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -26,6 +32,12 @@ public class SaleInfoController {
 
     @Autowired
     private SaleInfoService saleInfoService;
+
+    @Autowired
+    private DrugInfoService drugInfoService;
+
+    @Autowired
+    private InsellDrugInfoService insellDrugInfoService;
 
 
     /**
@@ -85,6 +97,24 @@ public class SaleInfoController {
     @ResponseBody
     public Object saleInfoAdd(SaleInfo saleInfo) {
         try {
+            //查询当前药品的价格
+            DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(saleInfo.getDname());
+            saleInfo.setOperateTime(new Date());
+            saleInfo.setTotal(saleInfo.getCount() * drugInfo.getPrice());
+            //更新药品在售信息表的库存
+            InsellDrugInfo insellDrugInfo1 = insellDrugInfoService.selectDrugCountByDruginnum(saleInfo.getInnum());
+            if (insellDrugInfo1.getSellcount() < saleInfo.getCount()) {
+                return ResultMapUtil.getFailUpdateInSellForCount();
+            }
+            InsellDrugInfo insellDrugInfo = new InsellDrugInfo();
+            insellDrugInfo.setSellcount(saleInfo.getCount());
+            insellDrugInfo.setSellnum(saleInfo.getCount());
+            insellDrugInfo.setOutprice(saleInfo.getTotal());
+            insellDrugInfo.setInnum(saleInfo.getInnum());
+            int i1 = insellDrugInfoService.updatebyDruginnum(insellDrugInfo);
+            if (i1 == 0) {
+                return ResultMapUtil.getFailUpdateInSell();
+            }
             int i = saleInfoService.addSaleInfo(saleInfo);
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {

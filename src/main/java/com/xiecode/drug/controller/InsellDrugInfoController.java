@@ -39,6 +39,8 @@ public class InsellDrugInfoController {
     @RequestMapping
     public String insellDrugInfo() {
 
+        //查询药品在售记录里边库存为零的的记录
+
         return "/insellDrugInfo";
     }
 

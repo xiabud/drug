@@ -64,7 +64,7 @@
                     {field: 'druginnum', title: '药品批号', width: 150, align: 'center'},
                     {field: 'sellnnum', title: '出库数量', align: 'center'},
                     {field: 'returnnum', title: '退货数量', align: 'center'},
-                    {title: '销售率检查', align: 'center', width: 190, templet: isExpire},
+                    {title: '出库率检查', align: 'center', width: 190, templet: isExpire},
                     {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}
                 ]
             ]
@@ -127,11 +127,11 @@
             var sellrate = d.sellrate;
             sellrate = sellrate * 100;
             if (sellrate >= 60 && sellrate <= 90) {
-                return "<span style='color:blue'>此批药品销售率为" + sellrate + "%!</span>";
+                return "<span style='color:blue'>此批药品出库率为" + sellrate + "%!</span>";
             } else if (sellrate < 60) {
-                return "<span style='color:red'>此批药品销售率为" + sellrate + "%!</span>";
+                return "<span style='color:red'>此批药品出库率为" + sellrate + "%!</span>";
             } else if (sellrate > 90) {
-                return "<span style='color:green'>此批药品销售率为" + sellrate + "%!</span>";
+                return "<span style='color:green'>此批药品出库率为" + sellrate + "%!</span>";
             }
         }
 

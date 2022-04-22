@@ -60,7 +60,7 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
-                    {field: 'dnumber', title: '药品编号', align: 'center'},
+                    {field: 'innum', title: '药品编号', align: 'center'},
                     {field: 'count', title: '销售数量', align: 'center'},
                     {field: 'total', title: '销售金额', align: 'center'},
                     {field: 'operator', title: '操作人', align: 'center'},
@@ -69,7 +69,7 @@
                         title: '操作时间',
                         width: 250,
                         align: 'center',
-                        templet: "<div>{{layui.util.toDateString(d.operateTime,'yyyy-MM-dd HH:mm:ss')}}</div>"
+                        templet: "<div>{{layui.util.toDateString(d.operateTime,'yyyy-MM-dd HH:mm')}}</div>"
                     },
                     {title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
                 ]

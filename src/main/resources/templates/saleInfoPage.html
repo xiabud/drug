@@ -16,13 +16,13 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">药品名称</label>
                     <div class="layui-input-block">
-                        <select name="dname" id="dname" ></select>
+                        <select name="dname" id="dname" lay-filter="dname"></select>
                     </div>
                 </div>
                 <div class="layui-form-item">
-                    <label class="layui-form-label">药品编码</label>
+                    <label class="layui-form-label">药品批号</label>
                     <div class="layui-input-block">
-                        <input type="text" name="dnumber" th:value="${obj?.dnumber}" lay-verify="required" placeholder="请输入药品的编码" autocomplete="off" class="layui-input">
+                        <select name="innum" id="innum" lay-filter="innum"></select>
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -31,24 +31,24 @@
                         <input type="text" name="count" th:value="${obj?.count}" lay-verify="required" placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <!--<div class="layui-form-item">
                     <label class="layui-form-label">金额</label>
                     <div class="layui-input-block">
                         <input type="text" name="total" th:value="${obj?.total}" lay-verify="required" placeholder="请输入金额" autocomplete="off" class="layui-input">
                     </div>
-                </div>
+                </div>-->
                 <div class="layui-form-item">
                     <label class="layui-form-label">操作人</label>
                     <div class="layui-input-block">
                         <input type="text" name="operator" th:value="${obj?.operator}" lay-verify="required" placeholder="请输入操作人" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <!--<div class="layui-form-item">
                     <label class="layui-form-label">操作时间</label>
                     <div class="layui-input-block">
                         <input type="text" readonly name="operateTime" id="operateTime" th:value="${obj?.operateTimeStr}" lay-verify="required" placeholder="请输入操作时间" autocomplete="off" class="layui-input">
                     </div>
-                </div>
+                </div>-->
                 <div class="layui-form-item layui-hide">
                     <input type="button" lay-submit lay-filter="LAY-from-submit" id="LAY-from-submit" value="确认">
                 </div>
@@ -74,7 +74,7 @@
         var currentdname = '[[${obj?.dname}]]';
         //获取药品列表
         $.ajax({
-            url: '/drugInfo/drugInfoList',
+            url: '/insellDrugInfo/insellDrugInfoList',
             dataType: 'json',
             type: 'post',
             cache: false,
@@ -82,9 +82,9 @@
                 $('#dname').prepend("<option value=''>请选择<option>");
                 for (var i = 0; i < data.data.length; i++) {
                     if (data.data[i].name == currentdname) {
-                        $('#dname').prepend("<option selected value='" + data.data[i].name + "'>" + data.data[i].name + "");
+                        $('#dname').prepend("<option selected value='" + data.data[i].dname + "'>" + data.data[i].dname + "");
                     } else {
-                        $('#dname').prepend("<option value='"+data.data[i].name+"'>"+data.data[i].name+"");
+                        $('#dname').prepend("<option value='" + data.data[i].dname + "'>" + data.data[i].dname + "");
                     }
 
                 }
@@ -92,6 +92,35 @@
                 //下拉列表渲染
                 form.render();
             }
+        });
+        form.on('select(dname)', function (d) {
+            console.log(d.value); //得到被选中的值
+            var nowdname = d.value;
+            //当前药品的值
+            var currentdruginnum = '[[${obj?.dname}]]';
+            //获取药品编号列表
+            $.ajax({
+                url: '/insellDrugInfo/insellDrugInfoListByDrugName?dname=' + nowdname,
+                dataType: 'json',
+                type: 'post',
+                cache: false,
+                success: function (data) {
+                    $('#innum').empty();
+                    $('#innum').prepend("<option value=''>请选择<option>");
+                    console.log(data);
+                    for (var i = 0; i < data.data.length; i++) {
+                        if (data.data[i].innum == currentdruginnum) {
+                            $('#innum').prepend("<option selected value='" + data.data[i].innum + "'>" + data.data[i].innum + "</option>");
+                        } else {
+                            $('#innum').prepend("<option value='" + data.data[i].innum + "'>" + data.data[i].innum + "</option>");
+                        }
+
+                    }
+                    data = undefined;
+                    //下拉列表渲染
+                    form.render();
+                }
+            });
         })
 
     });

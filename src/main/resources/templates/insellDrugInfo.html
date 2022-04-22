@@ -61,19 +61,21 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
-                    {field: 'innum', title: '药品批号', idth: 150, align: 'center'},
+                    {field: 'innum', title: '药品批号', idth: 190, align: 'center'},
                     {field: 'sellcount', title: '在售数量', align: 'center'},
-                    {field: 'warranty', title: '保质期(月)', width: 90, align: 'center'},
+
                     {
                         field: 'intime',
                         title: '进货时间',
                         align: 'center',
                         templet: "<div>{{layui.util.toDateString(d.intime,'yyyy-MM-dd')}}</div>"
                     },
+                    {title: '药品过期检查', align: 'center', width: 200, templet: isExpire},
                     {field: 'sellnum', title: '售出数量', align: 'center'},
                     {field: 'outprice', title: '售出金额', align: 'center'},
                     {field: 'returnnum', title: '退货数量', align: 'center'},
-                    {field: 'inprice', title: '退货金额', align: 'center'},
+                    {field: 'inprice', title: '退货金额', align: 'center'}
+                    //{field: 'warranty', title: '保质期(月)', width: 100, align: 'center'},
                     //{title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
                 ]
             ]
@@ -129,6 +131,31 @@
                     break;
             }
         });
+
+        //计算药品是否过期
+        function isExpire(d) {
+            //获取进货日期
+            console.log(d);
+            var itime = d.ptime;
+            console.log(itime);
+            itime = itime.split("-");
+            itime = (parseInt(itime[0]) * 12 + parseInt(itime[1])) * 30 + parseInt(itime[2]);
+            //获取当前时间
+            var date = new Date();
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var now_time = (year * 12 + month) * 30 + date.getDay();
+            var m = itime + (parseInt(d.warranty) * 30) - now_time;
+            if (m <= 90 && m >= 0) {
+                return "<span style='color:blue'>" + 保质期仅剩 + m + "天 </span>";
+            } else if (m < 0) {
+                return "<span style='color:red'>" + 已过期 + m + "天</span>";
+            } else if (m > 90) {
+                return "<span style='color:green'>药品未过期，剩余" + m + "天</span>";
+            }
+        }
+
+
         //监听编辑和删除
         table.on('tool(main-table)', function (obj) {
             var data = obj.data;

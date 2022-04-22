@@ -99,7 +99,7 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     List<InsellDrugInfo> insellDrugInfoListByDrugName(String dname);
 
     /**
-     * @Description: 更新药品在售信息单的数据通过药品单号
+     * @Description: 更新药品在售信息单的数据通过药品单号(增加库存)
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
      * @Author: Xiewc
