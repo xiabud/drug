@@ -125,4 +125,17 @@ public class BillInfoServiceImpl extends ServiceImpl<BillInfoMapper, BillInfo> i
     public List<BillInfo> queryDrugInfoListBySName(String sname) {
         return billInfoMapper.queryDrugInfoListBySName(sname);
     }
+
+    /**
+     * @param druginnum
+     * @Description: 根据药品进货编码主键查询药品进货时进货数量
+     * @param: [druginnum]
+     * @return: com.xiecode.drug.pojo.BillInfo
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    @Override
+    public BillInfo selectCountByDrugInnum(String druginnum) {
+        return billInfoMapper.selectCountByDrugInnum(druginnum);
+    }
 }

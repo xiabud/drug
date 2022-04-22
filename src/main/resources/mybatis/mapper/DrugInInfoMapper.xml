@@ -20,4 +20,7 @@
     <select id="selectDrugCountByDruginnum" resultType="java.lang.Integer">
         SELECT drugCount FROM drug_in_info where drugInNum = #{druginnum}
     </select>
+    <select id="drugInInfoListByDrugCount" resultType="com.xiecode.drug.pojo.DrugInInfo">
+        select * from drug_in_info where drugCount = 0
+    </select>
 </mapper>

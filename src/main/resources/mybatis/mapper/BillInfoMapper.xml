@@ -5,4 +5,7 @@
     <select id="queryDrugInfoListBySName" resultType="com.xiecode.drug.pojo.BillInfo">
         select * from bill_info WHERE sname = #{sName}
     </select>
+    <select id="selectCountByDrugInnum" resultType="com.xiecode.drug.pojo.BillInfo">
+        select * from bill_info WHERE drugInNum = #{druginnum}
+    </select>
 </mapper>

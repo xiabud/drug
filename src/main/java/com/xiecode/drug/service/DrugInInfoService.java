@@ -124,4 +124,13 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
      * @Date: 2022/4/21
      */
     int selectDrugCountByDruginnum(String druginnum);
+
+    /**
+     * @Description: 获取所有药品库存为零的药品
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    List<DrugInInfo> drugInInfoListByDrugCount();
 }

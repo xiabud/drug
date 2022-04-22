@@ -77,4 +77,13 @@ public interface BillInfoService extends IService<BillInfo> {
      * @Date: 2022/4/19
      */
     List<BillInfo> queryDrugInfoListBySName(String sname);
+
+    /**
+     * @Description: 根据药品进货编码主键查询药品进货时进货数量
+     * @param: [druginnum]
+     * @return: com.xiecode.drug.pojo.BillInfo
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    BillInfo selectCountByDrugInnum(String druginnum);
 }

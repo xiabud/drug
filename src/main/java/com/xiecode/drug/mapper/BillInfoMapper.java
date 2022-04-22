@@ -17,4 +17,6 @@ import java.util.List;
 public interface BillInfoMapper extends BaseMapper<BillInfo> {
 
     List<BillInfo> queryDrugInfoListBySName(@Param("sName") String sname);
+
+    BillInfo selectCountByDrugInnum(@Param("druginnum") String druginnum);
 }
