@@ -9,7 +9,7 @@
     </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer">
-        SELECT MAX(id) FROM drug_in_info
+        SELECT IFNULL(MAX(id),0) FROM drug_in_info
     </select>
     <select id="drugInInfoListByDrugName" resultType="com.xiecode.drug.pojo.DrugInInfo">
         select * from drug_in_info where name = #{dname}

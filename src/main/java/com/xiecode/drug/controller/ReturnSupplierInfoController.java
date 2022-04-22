@@ -106,6 +106,12 @@ public class ReturnSupplierInfoController {
             drugOutInfo.setDrugoutprice(returnSupplierInfo.getDcount() * drugInfo.getPrice());
             drugOutInfo.setOuttime(returnSupplierInfo.getCreateTime());
             int j = drugInInfoService.updatebyDruginnum(drugOutInfo);
+            //更新药品信息里面的库存
+            int l = drugInfoService.updateReduceStock(returnSupplierInfo.getDcount(), returnSupplierInfo.getDname());
+            if (l == 0) {
+                return ResultMapUtil.getFailUpdateDrugInfo();
+            }
+
             int k = 0;
             if (i == 1 && j == 1) {
                 k = 1;

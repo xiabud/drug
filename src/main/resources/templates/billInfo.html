@@ -166,7 +166,7 @@
                     });
                     break;
                 case 'del':
-                    layer.confirm('确认要删除本条账单记录吗？', function (index) {
+                    layer.confirm('确认要删除本条进货记录吗？', function (index) {
                         $.ajax({
                             url: '/billInfo/billInfoDelById?id=' + data.id,
                             data: null,

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiecode.drug.mapper.InsellDrugInfoMapper">
+    <update id="updatebyDruginnum"></update>
+    <update id="updateDrugCountByDruginnum"></update>
+
+    <select id="selectMaxID" resultType="java.lang.Integer"></select>
+    <select id="insellDrugInfoListByDrugName" resultType="com.xiecode.drug.pojo.InsellDrugInfo"></select>
+    <select id="selectDrugCountByDruginnum" resultType="java.lang.Integer"></select>
+</mapper>

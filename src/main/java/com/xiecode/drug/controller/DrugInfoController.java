@@ -184,9 +184,5 @@ public class DrugInfoController {
     }
 
 
-    @RequestMapping("/warranty")
-    public Object warranty() {
-        return "/warranty";
-    }
 }
 

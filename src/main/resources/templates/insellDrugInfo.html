@@ -2,7 +2,7 @@
 <html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>药品退货到供应商信息管理</title>
+    <title>药品在售信息列表</title>
     <!--引入本地的css和js-->
     <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
     <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
@@ -19,19 +19,20 @@
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">药品退货到供应商信息列表</div>
+                <div class="layui-card-header">药品在售信息列表</div>
                 <div class="layui-card-body">
                     <table class="layui-hide" id="main-table" lay-filter="main-table"></table>
                     <script type="text/html" id="toolbarDemo">
                         <span class="layui-inline" style="width: 240px">
-                            <input class="layui-input" name="param" id="param" placeholder="根据药品名称查询" autocomplete="off">
+                            <input class="layui-input" name="param" id="param" placeholder="根据药品名称查询"
+                                   autocomplete="off">
                         </span>
                         <span class="layui-btn layui-btn-sm layui-bg-red" lay-event="querySearch">
                             <i class="layui-icon layui-icon-search"></i>查询
                         </span>
-                        <span class="layui-btn layui-btn-sm layui-bg-green" lay-event="add">
+                        <!--<span class="layui-btn layui-btn-sm layui-bg-green" lay-event="add">
                             <i class="layui-icon layui-icon-add-1"></i>添加
-                        </span>
+                        </span>-->
                     </script>
                     <script type="text/html" id="barDemo">
                         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
@@ -51,7 +52,7 @@
         table.render({
             elem: '#main-table',
             height: 650,
-            url: '/returnSupplierInfo/returnSupplierInfoQueryPage',
+            url: '/insellDrugInfo/insellDrugInfoQueryPage',
             method: 'POST',
             page: true,
             id: 'table-load',
@@ -60,18 +61,19 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
-                    {field: 'druginnum', title: '药品编号', width: 150, align: 'center'},
-                    {field: 'dcount', title: '退货数量', align: 'center'},
-                    {field: 'supplierName', title: '供应商名称', width: 230, align: 'center'},
-                    {field: 'reason', title: '退货原因', width: 300, align: 'center'},
+                    {field: 'innum', title: '药品批号', align: 'center'},
+                    {field: 'sellcount', title: '在售数量', align: 'center'},
+                    {field: 'warranty', title: '保质期(月)', width: 90, align: 'center'},
                     {
-                        field: 'createtime',
-                        title: '退货时间',
-                        width: 150,
+                        field: 'intime',
+                        title: '进货时间',
                         align: 'center',
-                        templet: "<div>{{layui.util.toDateString(d.createTime,'yyyy-MM-dd')}}</div>"
+                        templet: "<div>{{layui.util.toDateString(d.intime,'yyyy-MM-dd')}}</div>"
                     },
-                    {title: '操作', width: 120, align: 'center', toolbar: '#barDemo', field: 'right'}
+                    {field: 'outprice', title: '进货金额', align: 'center'},
+                    {field: 'returnnum', title: '退货数量', align: 'center'},
+                    {field: 'inprice', title: '退货金额', align: 'center'},
+                    //{title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
                 ]
             ]
         });
@@ -82,10 +84,10 @@
                 case 'add':
                     layer.open({
                         type: 2,
-                        title: '新增收到药品退货信息',
-                        content: '/returnSupplierInfo/returnSupplierInfoPage',
+                        title: '新增药品进货信息',
+                        content: '/drugInInfo/drugInInfoPage',
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '550px'],
+                        area: ['600px', '500px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];
@@ -93,9 +95,8 @@
                             //监听提交
                             iframeWindow.layui.form.on('submit(LAY-from-submit)', function (data) {
                                 var filed = data.field;
-                                console.log(filed);
                                 $.ajax({
-                                    url: '/returnSupplierInfo/returnSupplierInfoAdd',
+                                    url: '/drugInInfo/drugInInfoAdd',
                                     data: filed,
                                     async: false,
                                     cache: false,
@@ -127,7 +128,6 @@
                     break;
             }
         });
-
         //监听编辑和删除
         table.on('tool(main-table)', function (obj) {
             var data = obj.data;
@@ -135,10 +135,10 @@
                 case 'edit':
                     layer.open({
                         type: 2,
-                        title: '编辑收到药品退货信息',
-                        content: '/returnSupplierInfo/returnSupplierInfoQueryById?id='+data.id,
+                        title: '编辑药品信息',
+                        content: '/drugInInfo/drugInInfoQueryById?id=' + data.id,
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '550px'],
+                        area: ['600px', '500px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];
@@ -147,7 +147,7 @@
                             iframeWindow.layui.form.on('submit(LAY-from-submit)', function (data) {
                                 var filed = data.field;
                                 $.ajax({
-                                    url: '/returnSupplierInfo/returnSupplierInfoEdit',
+                                    url: '/drugInInfo/drugInInfoEdit',
                                     data: filed,
                                     async: false,
                                     cache: false,
@@ -167,9 +167,9 @@
                     });
                     break;
                 case 'del':
-                    layer.confirm('确认要删除本条退货记录吗？', function (index) {
+                    layer.confirm('确认要删除本条药品进货记录吗？', function (index) {
                         $.ajax({
-                            url: '/returnSupplierInfo/returnSupplierInfoDelById?id=' + data.id,
+                            url: '/drugInInfo/drugInInfoDelById?id=' + data.id,
                             data: null,
                             async: false,
                             cache: false,
