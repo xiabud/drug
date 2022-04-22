@@ -1,14 +1,15 @@
 package com.xiecode.drug.controller;
-
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.OrderCoderUtil;
 import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.BillInfo;
 import com.xiecode.drug.pojo.DrugInInfo;
 import com.xiecode.drug.pojo.DrugInfo;
+import com.xiecode.drug.pojo.OutOrInInfo;
 import com.xiecode.drug.service.BillInfoService;
 import com.xiecode.drug.service.DrugInInfoService;
 import com.xiecode.drug.service.DrugInfoService;
+import com.xiecode.drug.service.OutOrInInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,6 +39,8 @@ public class BillInfoController {
     @Autowired
     private DrugInInfoService drugInInfoService;
 
+    @Autowired
+    private OutOrInInfoService outOrInInfoService;
 
     /**
      * @Description: 转向账单信息页面
@@ -120,6 +123,18 @@ public class BillInfoController {
             }
             if (insert == 0) {
                 return ResultMapUtil.getFailInsertDrugInInfo();
+            }
+            //插入药品入库信息
+            OutOrInInfo outOrInInfo = new OutOrInInfo();
+            outOrInInfo.setDname(drugInfo.getName());
+            outOrInInfo.setType("从供应商进货：入库");
+            outOrInInfo.setCount(billInfo.getCount());
+            outOrInInfo.setOperator("谢炜程");
+            outOrInInfo.setCreateTime(billInfo.getBuyTime());
+            outOrInInfo.setDruginnum(drugInInfo.getDruginnum());
+            int i2 = outOrInInfoService.addOutOrInInfo(outOrInInfo);
+            if (i2 == 0) {
+                return ResultMapUtil.getFailInsertOutOrIn();
             }
             int i = billInfoService.addBillInfo(billInfo);
             return ResultMapUtil.getHashMapSave(i);

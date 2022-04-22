@@ -60,6 +60,7 @@
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
+                    {field: 'druginnum', title: '药品批号', align: 'center'},
                     {field: 'type', title: '出库/入库', align: 'center'},
                     {field: 'count', title: '出库/入库数量', align: 'center'},
                     {field: 'operator', title: '操作人', align: 'center'},
@@ -68,10 +69,10 @@
                         title: '操作时间',
                         width: 250,
                         align: 'center',
-                        templet: "<div>{{layui.util.toDateString(d.createTime,'yyyy-MM-dd HH:mm:ss')}}</div>"
+                        templet: "<div>{{layui.util.toDateString(d.createTime,'yyyy-MM-dd')}}</div>"
                     },
                     //删除药品出入库列表的编辑功能
-                    // {title: '操作',align: 'center',toolbar: '#barDemo',field: 'right'}
+                    {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}
                 ]
             ]
         });

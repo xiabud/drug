@@ -102,6 +102,22 @@ public class ResultMapUtil {
      * @Author: Xiewc
      * @Date: 2022/4/18
      */
+    public static HashMap<String, Object> getFailInsertOutOrIn() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "保存失败,更新药品出入库信息单失败！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
+     * @Description: 插入药品进货单失败
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
     public static HashMap<String, Object> getFailInsertDrugInfo() {
         HashMap<String, Object> resultMap = new HashMap<>();
         resultMap.put("msg", "保存失败,更新药品信息单失败！");
