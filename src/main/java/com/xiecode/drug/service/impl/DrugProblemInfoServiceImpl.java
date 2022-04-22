@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -67,12 +68,14 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
         //查询药品库存
         int drugcount = drugInInfoMapper.selectDrugCountByDruginnum(drugProblemInfo.getDruginnum());
         int i = 0;
+        int j = 0;
         int insert = 0;
         if (drugcount >= drugProblemInfo.getDcount()) {
             DrugInInfo drugInInfo = new DrugInInfo();
             drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
             drugInInfo.setDrugcount(drugProblemInfo.getDcount());
             i = drugInInfoMapper.updateDrugCountByDruginnum(drugInInfo);
+            j = drugInInfoMapper.updateDrugRetuenByDruginnum(drugInInfo);
             insert = drugProblemInfoMapper.insert(drugProblemInfo);
         }
         int flag = 0;
@@ -132,5 +135,11 @@ public class DrugProblemInfoServiceImpl extends ServiceImpl<DrugProblemInfoMappe
     public List<DrugProblemInfo> queryDrugProblemInfoList() {
         return drugProblemInfoMapper.selectList(null);
     }
+
+    @Override
+    public int updateDrugProblemInfoBydrugInNum(String drugInNum, Date createTime) {
+        return drugProblemInfoMapper.updateDrugProblemInfoBydrugInNum(drugInNum, createTime);
+    }
+
 
 }

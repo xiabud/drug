@@ -28,19 +28,23 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">数量</label>
                     <div class="layui-input-block">
-                        <input type="text" name="count" th:value="${obj?.count}" lay-verify="required" placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
+                        <input type="text" name="count" th:value="${obj?.count}" lay-verify="required"
+                               placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
                     </div>
                 </div>
-                <!--<div class="layui-form-item">
-                    <label class="layui-form-label">总金额</label>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">药品单价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="total" th:value="${obj?.total}" lay-verify="required" placeholder="请输入总金额" autocomplete="off" class="layui-input">
+                        <input type="text" name="total" th:value="${obj?.total}" lay-verify="required"
+                               placeholder="请输入药品单价" autocomplete="off" class="layui-input">
                     </div>
-                </div>-->
+                </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">进货时间</label>
                     <div class="layui-input-block">
-                        <input type="text" readonly name="buyTime" id="buyTime" th:value="${obj?.buyTimeSimpleDateFormat}" lay-verify="required" placeholder="请输入进货时间" autocomplete="off" class="layui-input">
+                        <input type="text" readonly name="buyTime" id="buyTime"
+                               th:value="${obj?.buyTimeSimpleDateFormat}" lay-verify="required" placeholder="请输入进货时间"
+                               autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item layui-hide">

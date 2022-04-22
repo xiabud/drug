@@ -60,5 +60,11 @@ public class DrugProblemInfo implements Serializable {
     @TableField("drugInNum")
     private String druginnum;
 
+    /**
+     * 问题药品是否退货，
+     * 1:退货
+     * 0:未退货
+     */
+    private String isreturn = "未退货";
 
 }

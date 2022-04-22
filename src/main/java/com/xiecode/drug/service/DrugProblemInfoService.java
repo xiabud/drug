@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.xiecode.drug.pojo.DrugProblemInfo;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -69,5 +70,7 @@ public interface DrugProblemInfoService extends IService<DrugProblemInfo> {
      * @Date: 2022/4/16
      */
     List<DrugProblemInfo> queryDrugProblemInfoList();
+
+    int updateDrugProblemInfoBydrugInNum(String drugInNum, Date createTime);
 
 }

@@ -106,7 +106,7 @@ public class BillInfoController {
             drugInInfo.setSupplier(drugInfo.getSupplier());
             drugInInfo.setWarranty(drugInfo.getWarrenty());
             drugInInfo.setDruginnum(OrderCoderUtil.getOrderCode((long) id));
-            drugInInfo.setDruginprice(billInfo.getCount() * drugInfo.getPrice());
+            drugInInfo.setDruginprice(billInfo.getCount() * billInfo.getTotal());
             drugInInfo.setDrugcount(billInfo.getCount());
             drugInInfo.setIntime(billInfo.getBuyTime());
             int insert = drugInInfoService.insert(drugInInfo);

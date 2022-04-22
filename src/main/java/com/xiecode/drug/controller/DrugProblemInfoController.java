@@ -5,9 +5,11 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.pojo.DrugProblemInfo;
+import com.xiecode.drug.pojo.ReturnSupplierInfo;
 import com.xiecode.drug.service.DrugInInfoService;
 import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.DrugProblemInfoService;
+import com.xiecode.drug.service.ReturnSupplierInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +36,11 @@ public class DrugProblemInfoController {
     @Autowired
     private DrugInfoService drugInfoService;
 
+    @Autowired
     private DrugInInfoService drugInInfoService;
+
+    @Autowired
+    private ReturnSupplierInfoService returnSupplierInfoService;
 
 
     /**
@@ -95,6 +101,10 @@ public class DrugProblemInfoController {
     public Object drugProblemInfoAdd(DrugProblemInfo drugProblemInfo) {
         try {
             DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(drugProblemInfo.getDname());
+            int i1 = drugInInfoService.selectDrugCountByDruginnum(drugProblemInfo.getDruginnum());
+            if (i1 < drugProblemInfo.getDcount()) {
+                return ResultMapUtil.getStockLess();
+            }
             drugProblemInfo.setCreateTime(new Date());
             drugProblemInfo.setDprice(drugInfo.getPrice());
             int i = drugProblemInfoService.addDrugProblemInfo(drugProblemInfo);
@@ -149,7 +159,7 @@ public class DrugProblemInfoController {
      */
     @RequestMapping("/drugProblemInfoDelById")
     @ResponseBody
-    public Object drugProblemInfoDelById(Integer id){
+    public Object drugProblemInfoDelById(Integer id) {
         try {
             int i = drugProblemInfoService.deleteDrugProblemInfoByID(id);
             return ResultMapUtil.getHashMapDel(i);
@@ -157,7 +167,62 @@ public class DrugProblemInfoController {
             return ResultMapUtil.getHashMapException(e);
         }
     }
-    
+
+    /**
+     * @Description: 退货一个问题药品
+     * @param: [drugProblemInfo]
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/3/1
+     */
+    @RequestMapping("/drugProblemInfoReturn")
+    @ResponseBody
+    public Object drugProblemInfoReturn(Integer id) {
+        try {
+            //先获取要退货的药品信息
+            DrugProblemInfo drugProblemInfo = drugProblemInfoService.queryDrugProblemInfoById(id);
+            //已退货
+            if ("已退货".equals(drugProblemInfo.getIsreturn())) {
+                return ResultMapUtil.getisReturnSupplier();
+            }
+            //先获取要退货的药品所属的供应商
+            DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(drugProblemInfo.getDname());
+            //更新退货给供应商的数据
+            ReturnSupplierInfo returnSupplierInfo = new ReturnSupplierInfo();
+            returnSupplierInfo.setDname(drugProblemInfo.getDname());
+            returnSupplierInfo.setDcount(drugProblemInfo.getDcount());
+            returnSupplierInfo.setDruginnum(drugProblemInfo.getDruginnum());
+            returnSupplierInfo.setSupplierName(drugInfo.getSupplier());
+            returnSupplierInfo.setReason("问题药品导入退货：" + drugProblemInfo.getReason());
+            returnSupplierInfo.setCreateTime(new Date());
+            int i1 = returnSupplierInfoService.addReturnSupplierInfo(returnSupplierInfo);
+            if (i1 == 0) {
+                return ResultMapUtil.getFailInsertReturnSupplier();
+            }
+            //不更新药品库存的信息，因为添加药品库存信息时已经更新过了
+            //DrugInInfo drugInInfo = new DrugInInfo();
+            //drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
+            //drugInInfo.setDrugretuen(drugProblemInfo.getDcount());
+            ////TODO 药品的退货价钱
+            //drugInInfo.setDrugoutprice(0.0F);
+            //drugInInfo.setOuttime(returnSupplierInfo.getCreateTime());
+            //int i2 = drugInInfoService.updatebyDruginnum(drugInInfo);
+            //if (i2 == 0) {
+            //    return ResultMapUtil.getFailUpdateDrugInfo();
+            //}
+            //更新药品信息的总库存
+            int i3 = drugInfoService.updateReduceStock(drugProblemInfo.getDcount(), drugProblemInfo.getDname());
+            if (i3 == 0) {
+                return ResultMapUtil.getFailUpdateDrugInfo();
+            }
+            //更新问题药品表的退货标识
+            int i = drugProblemInfoService.updateDrugProblemInfoBydrugInNum(drugProblemInfo.getDruginnum(), drugProblemInfo.getCreateTime());
+            return ResultMapUtil.getReturnSupplierSuccess(i);
+        } catch (Exception e) {
+            return ResultMapUtil.getHashMapException(e);
+        }
+    }
+
 
 }
 

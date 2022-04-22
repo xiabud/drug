@@ -34,6 +34,7 @@
                         </span>
                     </script>
                     <script type="text/html" id="barDemo">
+                        <a class="layui-btn layui-btn-xs layui-btn-warm" lay-event="return">退货</a>
                         <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
                         <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
                     </script>
@@ -70,7 +71,8 @@
                         align: 'center',
                         templet: "<div>{{layui.util.toDateString(d.createTime,'yyyy-MM-dd HH:mm:ss')}}</div>"
                     },
-                    {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}
+                    {field: 'isreturn', title: '状态', align: 'center'},
+                    {title: '操作', width: 180, align: 'center', toolbar: '#barDemo', field: 'right'}
                 ]
             ]
         });
@@ -164,6 +166,21 @@
                         }
                     });
                     break;
+                case 'return':
+                    layer.confirm('确认要退货问题药品吗？', function (index) {
+                        $.ajax({
+                            url: '/drugProblemInfo/drugProblemInfoReturn?id=' + data.id,
+                            data: null,
+                            async: false,
+                            cache: false,
+                            success: function (str) {
+                                table.reload('table-load');
+                                layer.msg(str.msg, {icon: str.icon, anim: str.anim});
+                            }
+                        });
+                    });
+                    break;
+
                 case 'del':
                     layer.confirm('确认要删除本条问题药品记录吗？', function (index) {
                         $.ajax({

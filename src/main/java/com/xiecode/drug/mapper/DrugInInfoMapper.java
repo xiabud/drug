@@ -24,4 +24,6 @@ public interface DrugInInfoMapper extends BaseMapper<DrugInInfo> {
     int updateDrugCountByDruginnum(DrugInInfo drugOutInfo);
 
     int selectDrugCountByDruginnum(String druginnum);
+
+    int updateDrugRetuenByDruginnum(DrugInInfo drugInInfo);
 }

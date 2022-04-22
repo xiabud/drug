@@ -112,6 +112,61 @@ public class ResultMapUtil {
     }
 
     /**
+     * @Description: 更新药品退货信息失败（减少）
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    public static HashMap<String, Object> getFailInsertReturnSupplier() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "保存失败,更新药品退货信息失败！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
+     * @Description: 当已退货药品继续点击退货
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    public static HashMap<String, Object> getisReturnSupplier() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "此药品已经退货！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
+     * @Description: 当已退货药品继续点击退货
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    public static HashMap<String, Object> getReturnSupplierSuccess(int i) {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        if (i == 1) {
+            resultMap.put("msg", "药品退货成功！");
+            resultMap.put("code", 0);
+            resultMap.put("icon", 1);
+            resultMap.put("anim", 4);
+        } else {
+            resultMap.put("msg", "药品退货失败！");
+            resultMap.put("code", 1);
+            resultMap.put("icon", 5);
+            resultMap.put("anim", 6);
+        }
+        return resultMap;
+    }
+
+    /**
      * @Description: 更新药品信息库存失败（减少）
      * @param: []
      * @return: java.util.HashMap<java.lang.String, java.lang.Object>

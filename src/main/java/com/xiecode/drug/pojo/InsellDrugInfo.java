@@ -60,22 +60,22 @@ public class InsellDrugInfo implements Serializable {
      * 已销售数量
      */
     @TableField("sellNum")
-    private Integer sellnum;
+    private Integer sellnum = 0;
 
     /**
      * 退货数量
      */
     @TableField("returnNum")
-    private Integer returnnum;
+    private Integer returnnum = 0;
 
     /**
      * 销售金额
      */
-    private Float outprice;
+    private Float outprice = (float) 0d;
 
     /**
      * 退货金额
      */
-    private Float inprice;
+    private Float inprice = (float) 0d;
 
 }

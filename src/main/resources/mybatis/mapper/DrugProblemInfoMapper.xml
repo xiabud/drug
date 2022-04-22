@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.DrugProblemInfoMapper">
 
+    <update id="updateDrugProblemInfoBydrugInNum">
+        UPDATE drug_problem_info SET isreturn = '已退货' WHERE drugInNum = #{druginnum} and create_time = #{createtime}
+    </update>
 </mapper>
