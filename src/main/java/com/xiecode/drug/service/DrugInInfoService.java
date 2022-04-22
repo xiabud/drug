@@ -62,7 +62,7 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
     int deleteDrugInInfoByID(int id);
 
     /**
-     * @Description: 查询所有药品入库登记记账的列表
+     * @Description: 查询所有药品入库登记记账的药品名字（去重）
      * @param: []
      * @return: java.util.List<com.xiecode.drug.pojo.DrugInfo>
      * @Author: Xiewc
@@ -108,13 +108,13 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
     int updatebyDruginnum(DrugInInfo drugOutInfo);
 
     /**
-     * @Description: 根据进货编号来更新库存
+     * @Description: 根据进货编号来更新库存（减少）
      * @param: []
      * @return: void
      * @Author: Xiewc
      * @Date: 2022/4/20
      */
-    int updateDrugCountByDruginnum(DrugInInfo drugOutInfo);
+    int updatereduceDrugCountByDruginnum(DrugInInfo drugOutInfo);
 
     /**
      * @Description: 根据药品进货批号来查询药品数量
@@ -133,4 +133,22 @@ public interface DrugInInfoService extends IService<DrugInInfo> {
      * @Date: 2022/4/20
      */
     List<DrugInInfo> drugInInfoListByDrugCount();
+
+    /**
+     * @Description: 获取所有的药品进货记录的药品名字（去重）
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    List<DrugInInfo> drugInInfoListOnly();
+
+    /**
+     * @Description: 根据进货编号来更新库存（增加）
+     * @param: [drugInInfo]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    int updateAddDrugCountByDruginnum(DrugInInfo drugInInfo);
 }

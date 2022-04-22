@@ -64,6 +64,22 @@ public class ResultMapUtil {
     }
 
     /**
+     * @Description: 出库时更新药品库存信息失败
+     * @param: []
+     * @return: java.util.HashMap<java.lang.String, java.lang.Object>
+     * @Author: Xiewc
+     * @Date: 2022/4/18
+     */
+    public static HashMap<String, Object> getUpdateStockFail() {
+        HashMap<String, Object> resultMap = new HashMap<>();
+        resultMap.put("msg", "出库时更新药品库存信息失败！");
+        resultMap.put("code", 1);
+        resultMap.put("icon", 5);
+        resultMap.put("anim", 6);
+        return resultMap;
+    }
+
+    /**
      * @Description: 出库时库存不够抛出错误
      * @param: []
      * @return: java.util.HashMap<java.lang.String, java.lang.Object>

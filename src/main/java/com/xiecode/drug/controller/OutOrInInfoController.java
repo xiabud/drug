@@ -3,7 +3,9 @@ package com.xiecode.drug.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.xiecode.drug.common.ResultMapUtil;
+import com.xiecode.drug.pojo.DrugInInfo;
 import com.xiecode.drug.pojo.OutOrInInfo;
+import com.xiecode.drug.service.DrugInInfoService;
 import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.OutOrInInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class OutOrInInfoController {
 
     @Autowired
     private DrugInfoService drugInfoService;
+
+    @Autowired
+    private DrugInInfoService drugInInfoService;
 
     /**
      * @Description: 转向药品出入库页面
@@ -93,15 +98,33 @@ public class OutOrInInfoController {
             System.out.println("===========" + outorininfo + "============");
             if (outorininfo.getType().equals("入库")) {
                 //更新药品信息里面的库存
+                outorininfo.setType("非供应商进货：入库");
                 drugInfoService.updateAddStock(outorininfo.getCount(), outorininfo.getDname());
+                //增加药品库存里的数量
+                DrugInInfo drugInInfo = new DrugInInfo();
+                drugInInfo.setDruginnum(outorininfo.getDruginnum());
+                drugInInfo.setDrugcount(outorininfo.getCount());
+                int i = drugInInfoService.updateAddDrugCountByDruginnum(drugInInfo);
+                if (i == 0) {
+                    return ResultMapUtil.getUpdateStockFail();
+                }
             } else if (outorininfo.getType().equals("出库")) {
                 //检查药品信息里面的库存，如果库存小于出库数量，则这一单无法输出。
-                int stock = drugInfoService.selectStock(outorininfo.getDname());
+                int stock = drugInInfoService.selectDrugCountByDruginnum(outorininfo.getDruginnum());
                 if (stock < outorininfo.getCount()) {
                     return ResultMapUtil.getStockLess();
                 }
+                outorininfo.setType("发出药品销售：出库");
                 //如果库存足够，则更新药品信息里面的库存
-                drugInfoService.updateReduceStock(outorininfo.getCount(), outorininfo.getDname());
+                //drugInfoService.updateReduceStock(outorininfo.getCount(), outorininfo.getDname());
+                //减少药品库存里的数量
+                DrugInInfo drugInInfo = new DrugInInfo();
+                drugInInfo.setDruginnum(outorininfo.getDruginnum());
+                drugInInfo.setDrugcount(outorininfo.getCount());
+                int i = drugInInfoService.updatereduceDrugCountByDruginnum(drugInInfo);
+                if (i == 0) {
+                    return ResultMapUtil.getUpdateStockFail();
+                }
             }
             outorininfo.setCreateTime(new Date());
             int i = outorininfoService.addOutOrInInfo(outorininfo);

@@ -164,6 +164,20 @@ public class DrugInInfoController {
     }
 
     /**
+     * @Description: 获取所有的药品进货记录的药品名字（去重）
+     * @param: []
+     * @return: java.lang.Object
+     * @Author: Xiewc
+     * @Date: 2022/4/16
+     */
+    @RequestMapping("/drugInInfoListOnly")
+    @ResponseBody
+    public Object drugInInfoListOnly() {
+        List<DrugInInfo> drugList = drugininfoService.drugInInfoListOnly();
+        return ResultMapUtil.getHashMapList(drugList);
+    }
+
+    /**
      * @Description: 获取所有的药品进货的进货编码
      * @param: []
      * @return: java.lang.Object

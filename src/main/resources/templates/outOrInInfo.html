@@ -86,7 +86,7 @@
                         title: '新增药品出入库信息',
                         content: '/outOrInInfo/outOrInInfoPage',
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '350px'],
+                        area: ['600px', '450px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];
@@ -136,9 +136,9 @@
                     layer.open({
                         type: 2,
                         title: '编辑药品出入库',
-                        content: '/outOrInInfo/outOrInInfoQueryById?id='+data.id,
+                        content: '/outOrInInfo/outOrInInfoQueryById?id=' + data.id,
                         shade: [0.8, '#393d49'],
-                        area: ['600px', '350px'],
+                        area: ['600px', '450px'],
                         btn: ['确定', '取消'],
                         yes: function (index, layero) {
                             var iframeWindow = window['layui-layer-iframe' + index];

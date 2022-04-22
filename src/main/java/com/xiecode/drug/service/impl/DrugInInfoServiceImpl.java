@@ -168,14 +168,14 @@ public class DrugInInfoServiceImpl extends ServiceImpl<DrugInInfoMapper, DrugInI
 
     /**
      * @param drugOutInfo
-     * @Description: 根据进货编号来更新库存
+     * @Description: 根据进货编号来更新库存(减少库存)
      * @param: []
      * @return: void
      * @Author: Xiewc
      * @Date: 2022/4/20
      */
     @Override
-    public int updateDrugCountByDruginnum(DrugInInfo drugOutInfo) {
+    public int updatereduceDrugCountByDruginnum(DrugInInfo drugOutInfo) {
         return drugInInfoMapper.updateDrugCountByDruginnum(drugOutInfo);
     }
 
@@ -202,6 +202,31 @@ public class DrugInInfoServiceImpl extends ServiceImpl<DrugInInfoMapper, DrugInI
     @Override
     public List<DrugInInfo> drugInInfoListByDrugCount() {
         return drugInInfoMapper.drugInInfoListByDrugCount();
+    }
+
+    /**
+     * @Description: 获取所有的药品进货记录的药品名字（去重）
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    @Override
+    public List<DrugInInfo> drugInInfoListOnly() {
+        return drugInInfoMapper.drugInInfoListOnly();
+    }
+
+    /**
+     * @param drugInInfo
+     * @Description: 根据进货编号来更新库存（增加）
+     * @param: [drugInInfo]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/22
+     */
+    @Override
+    public int updateAddDrugCountByDruginnum(DrugInInfo drugInInfo) {
+        return drugInInfoMapper.updateAddDrugCountByDruginnum(drugInInfo);
     }
 
 }

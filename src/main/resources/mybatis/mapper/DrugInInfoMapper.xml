@@ -10,6 +10,9 @@
     <update id="updateDrugRetuenByDruginnum">
         Update drug_in_info Set drugRetuen = drugRetuen + ${drugcount} Where drugInNum = #{druginnum}
     </update>
+    <update id="updateAddDrugCountByDruginnum">
+        Update drug_in_info Set drugCount = drugCount + ${drugcount} Where drugInNum = #{druginnum}
+    </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer">
         SELECT IFNULL(MAX(id),0) FROM drug_in_info
@@ -22,5 +25,8 @@
     </select>
     <select id="drugInInfoListByDrugCount" resultType="com.xiecode.drug.pojo.DrugInInfo">
         select * from drug_in_info where drugCount = 0
+    </select>
+    <select id="drugInInfoListOnly" resultType="com.xiecode.drug.pojo.DrugInInfo">
+        select distinct name from drug_in_info
     </select>
 </mapper>
