@@ -108,6 +108,15 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
     int updatebyDruginnum(InsellDrugInfo drugOutInfo);
 
     /**
+     * @Description: 更新药品在售信息单的数据通过药品单号(增加减少)
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    int updatebyDruginnumReduce(InsellDrugInfo drugOutInfo);
+
+    /**
      * @Description: 根据进货编号来更新库存
      * @param: []
      * @return: void
@@ -124,4 +133,13 @@ public interface InsellDrugInfoService extends IService<InsellDrugInfo> {
      * @Date: 2022/4/21
      */
     InsellDrugInfo selectDrugCountByDruginnum(String druginnum);
+
+    /**
+     * @Description: 获取所有药品库存为零的药品
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    List<InsellDrugInfo> drugInInfoListByDrugCount();
 }

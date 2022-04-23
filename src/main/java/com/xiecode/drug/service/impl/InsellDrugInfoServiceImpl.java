@@ -164,6 +164,19 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
 
     /**
      * @param drugOutInfo
+     * @Description: 更新药品在售信息单的数据通过药品单号(增加减少)
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.InsellDrugInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    @Override
+    public int updatebyDruginnumReduce(InsellDrugInfo drugOutInfo) {
+        return insellDrugInfoMapper.updatebyDruginnumReduce(drugOutInfo);
+    }
+
+    /**
+     * @param drugOutInfo
      * @Description: 更新药品在售信息的库存（增加）
      * @param: []
      * @return: void
@@ -186,5 +199,17 @@ public class InsellDrugInfoServiceImpl extends ServiceImpl<InsellDrugInfoMapper,
     @Override
     public InsellDrugInfo selectDrugCountByDruginnum(String druginnum) {
         return insellDrugInfoMapper.selectDrugCountByDruginnum(druginnum);
+    }
+
+    /**
+     * @Description: 获取所有药品库存为零的药品
+     * @param: []
+     * @return: java.util.List<com.xiecode.drug.pojo.DrugInInfo>
+     * @Author: Xiewc
+     * @Date: 2022/4/20
+     */
+    @Override
+    public List<InsellDrugInfo> drugInInfoListByDrugCount() {
+        return insellDrugInfoMapper.drugInInfoListByDrugCount();
     }
 }

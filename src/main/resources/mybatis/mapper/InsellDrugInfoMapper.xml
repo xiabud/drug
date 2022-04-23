@@ -3,11 +3,16 @@
 <mapper namespace="com.xiecode.drug.mapper.InsellDrugInfoMapper">
     <update id="updatebyDruginnum">
         UPDATE insell_drug_info
-        SET sellNum = sellNum + #{sellnum},outprice=outprice+#{outprice},sellcount = sellcount - #{sellcount}
+        SET sellNum = sellNum + #{sellnum},outprice = outprice + #{outprice},sellcount = sellcount - #{sellcount}
         WHERE InNum= #{innum}
     </update>
     <update id="updateDrugCountByDruginnum">
         UPDATE insell_drug_info SET sellcount = sellcount + #{sellcount} WHERE InNum = #{innum}
+    </update>
+    <update id="updatebyDruginnumReduce">
+        UPDATE insell_drug_info
+        SET returnnum = returnnum + #{returnnum},inprice=inprice + #{inprice}
+        WHERE InNum= #{innum}
     </update>
 
     <select id="selectMaxID" resultType="java.lang.Integer"></select>
@@ -16,5 +21,8 @@
     </select>
     <select id="selectDrugCountByDruginnum" resultType="com.xiecode.drug.pojo.InsellDrugInfo">
         SELECT * FROM insell_drug_info where InNum = #{druginnum}
+    </select>
+    <select id="drugInInfoListByDrugCount" resultType="com.xiecode.drug.pojo.InsellDrugInfo">
+        select * from insell_drug_info where sellcount = 0
     </select>
 </mapper>

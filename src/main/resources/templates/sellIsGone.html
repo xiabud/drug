@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>药品销售完信息</title>
+    <!--引入本地的css和js-->
+    <link rel="stylesheet" th:href="@{/static/layui/css/layui.css}" media="all">
+    <link rel="stylesheet" th:href="@{/static/admin/style.css}" media="all">
+    <script type="text/html" id="indexTpl">
+        {{d.LAY_TABLE_INDEX+1}}
+    </script>
+    <!-- 引入layui css -->
+    <!--<link rel="stylesheet" type="text/css" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css" />-->
+    <!-- 引入layui js -->
+    <!--<script src="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>-->
+</head>
+<body class="layui-layout-body">
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <div class="layui-card-header">药品销售完信息</div>
+                <div class="layui-card-body">
+                    <table class="layui-hide" id="main-table" lay-filter="main-table"></table>
+                    <script type="text/html" id="toolbarDemo">
+                        <span class="layui-inline" style="width: 240px">
+                            <input class="layui-input" name="param" id="param" placeholder="根据药品名称查询"
+                                   autocomplete="off">
+                        </span>
+                        <span class="layui-btn layui-btn-sm layui-bg-red" lay-event="querySearch">
+                            <i class="layui-icon layui-icon-search"></i>查询
+                        </span>
+                        <!--<span class="layui-btn layui-btn-sm layui-bg-green" lay-event="add">
+                            <i class="layui-icon layui-icon-add-1"></i>添加
+                        </span>-->
+                    </script>
+                    <script type="text/html" id="barDemo">
+                        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/static/layui/layui.js}"></script>
+<script>
+    layui.use(['table', 'form'], function () {
+        var $ = layui.$;
+        var table = layui.table;
+        table.render({
+            elem: '#main-table',
+            height: 650,
+            url: '/sellIsGone/sellIsGoneQueryPage',
+            method: 'POST',
+            page: true,
+            id: 'table-load',
+            toolbar: '#toolbarDemo',
+            cols: [
+                [
+                    {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
+                    {field: 'name', title: '药品名称', align: 'center'},
+                    {field: 'supplier', title: '供应商', align: 'center'},
+                    {field: 'druginnum', title: '药品批号', width: 150, align: 'center'},
+                    {field: 'sellnnum', title: '销售数量', align: 'center'},
+                    {field: 'returnnum', title: '退货数量', align: 'center'},
+                    {title: '销售率检查', align: 'center', width: 190, templet: isExpire},
+                    {title: '操作', align: 'center', toolbar: '#barDemo', field: 'right'}
+                ]
+            ]
+        });
+
+        //监听头工具栏的事件
+        table.on('toolbar(main-table)', function (obj) {
+            switch (obj.event) {
+                case 'querySearch':
+                    var param = $('#param').val();
+                    table.reload('table-load', {
+                        where: {
+                            param: param
+                        }
+                    });
+                    $('#param').val(param);
+                    break;
+            }
+        });
+
+        //计算药品销售率
+        function isExpire(d) {
+            //获取进货日期
+            var sellrate = d.sellrate;
+            sellrate = sellrate * 100;
+            if (sellrate >= 60 && sellrate <= 90) {
+                return "<span style='color:blue'>此批药品销售率为" + sellrate + "%!</span>";
+            } else if (sellrate < 60) {
+                return "<span style='color:red'>此批药品销售率为" + sellrate + "%!</span>";
+            } else if (sellrate > 90) {
+                return "<span style='color:green'>此批药品销售率为" + sellrate + "%!</span>";
+            }
+        }
+
+        //监听编辑和删除
+        table.on('tool(main-table)', function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'del':
+                    layer.confirm('确认要删除本条记录吗？', function (index) {
+                        $.ajax({
+                            url: '/sellIsGone/sellIsGoneDelById?id=' + data.id,
+                            data: null,
+                            async: false,
+                            cache: false,
+                            success: function (str) {
+                                table.reload('table-load');
+                                layer.msg(str.msg, {icon: str.icon, anim: str.anim});
+                            }
+                        });
+                    });
+                    break;
+            }
+        });
+    });
+</script>
+
+</html>

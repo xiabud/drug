@@ -48,4 +48,14 @@ public interface InsellDrugInfoMapper extends BaseMapper<InsellDrugInfo> {
      */
     InsellDrugInfo selectDrugCountByDruginnum(String druginnum);
 
+    /**
+     * @Description: 更新药品在售信息的库存（退货）
+     * @param: [drugOutInfo]
+     * @return: int
+     * @Author: Xiewc
+     * @Date: 2022/4/23
+     */
+    int updatebyDruginnumReduce(InsellDrugInfo drugOutInfo);
+
+    List<InsellDrugInfo> drugInInfoListByDrugCount();
 }

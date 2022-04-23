@@ -37,6 +37,11 @@ public class ReturnGoodsInfo implements Serializable {
     private String dname;
 
     /**
+     * 药品编码
+     */
+    private String innum;
+
+    /**
      * 数量
      */
     private Integer count;

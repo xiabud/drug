@@ -115,6 +115,10 @@ public class SaleInfoController {
             if (i1 == 0) {
                 return ResultMapUtil.getFailUpdateInSell();
             }
+            int i2 = drugInfoService.updateReduceStock(saleInfo.getCount(), saleInfo.getDname());
+            if (i2 == 0) {
+                return ResultMapUtil.getFailUpdateDrugInfo();
+            }
             int i = saleInfoService.addSaleInfo(saleInfo);
             return ResultMapUtil.getHashMapSave(i);
         } catch (Exception e) {
