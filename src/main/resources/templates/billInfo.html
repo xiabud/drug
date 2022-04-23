@@ -59,15 +59,15 @@
             cols: [
                 [
                     {title: '序号', templet: '#indexTpl', width: 60, align: 'center'},
-                    {field: 'sname', title: '供应商名称', align: 'center'},
+                    {field: 'sname', title: '供应商名称', width: 200, align: 'center'},
                     {field: 'dname', title: '药品名称', align: 'center'},
-                    {field: 'druginnum', title: '进货批号', align: 'center'},
+                    {field: 'druginnum', width: 150, title: '进货批号', align: 'center'},
                     {field: 'count', title: '进货数量', align: 'center'},
                     {field: 'total', title: '进货金额', align: 'center'},
                     {
                         field: 'buytime',
                         title: '进货时间',
-                        width: 250,
+                        width: 130,
                         align: 'center',
                         templet: "<div>{{layui.util.toDateString(d.buyTime,'yyyy-MM-dd')}}</div>"
                     },
