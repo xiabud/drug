@@ -29,7 +29,9 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">药品价格</label>
                     <div class="layui-input-block">
-                        <input type="text" name="price" th:value="${obj?.price}" lay-verify="required" placeholder="请输入药品价格" autocomplete="off" class="layui-input">
+                        <input type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')"
+                               name="price" th:value="${obj?.price}" lay-verify="required" placeholder="请输入药品价格"
+                               autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">

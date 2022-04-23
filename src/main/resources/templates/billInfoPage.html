@@ -28,14 +28,16 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">数量</label>
                     <div class="layui-input-block">
-                        <input type="text" name="count" th:value="${obj?.count}" lay-verify="required"
+                        <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="count"
+                               th:value="${obj?.count}" lay-verify="required"
                                placeholder="请输入药品的数量" autocomplete="off" class="layui-input">
                     </div>
                 </div>
                 <div class="layui-form-item">
                     <label class="layui-form-label">药品单价</label>
                     <div class="layui-input-block">
-                        <input type="text" name="total" th:value="${obj?.total}" lay-verify="required"
+                        <input type="text" onkeyup="value=value.replace(/^\D*(\d*(?:\.\d{0,2})?).*$/g, '$1')"
+                               name="total" th:value="${obj?.total}" lay-verify="required"
                                placeholder="请输入药品单价" autocomplete="off" class="layui-input">
                     </div>
                 </div>

@@ -28,7 +28,8 @@
                 <div class="layui-form-item">
                     <label class="layui-form-label">数量</label>
                     <div class="layui-input-block">
-                        <input type="text" name="dcount" th:value="${obj?.dcount}" lay-verify="required"
+                        <input type="text" onkeyup="value=value.replace(/[^\d]/g,'')" name="dcount"
+                               th:value="${obj?.dcount}" lay-verify="required"
                                placeholder="请输入问题药品数量" autocomplete="off" class="layui-input">
                     </div>
                 </div>
