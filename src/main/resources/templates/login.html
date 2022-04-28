@@ -5,22 +5,120 @@
     <title>医院药品管理系统</title>
     <link rel="stylesheet" th:href="@{static/layui/css/layui.css}" media="all">
     <link rel="stylesheet" th:href="@{static/admin/style.css}" media="all">
+    <style type="text/css">
+        .container {
+            width: 420px;
+            height: 220px;
+            min-height: 320px;
+            max-height: 220px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            margin: auto;
+            padding: 20px;
+            z-index: 130;
+            border-radius: 8px;
+            box-shadow: 0 3px 18px rgba(100, 0, 0, .5);
+            font-size: 16px;
+            background: #ffffff;
+        }
+
+        .close {
+            background-color: white;
+            border: none;
+            font-size: 18px;
+            margin-left: 410px;
+            margin-top: -10px;
+        }
+
+        .layui-input {
+            border-radius: 5px;
+            width: 300px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .layui-form-item {
+            margin-left: -20px;
+        }
+
+        #logoid {
+            margin-top: -16px;
+            padding-left: 150px;
+            padding-bottom: 15px;
+        }
+
+        #logo {
+            margin-top: -16px;
+            padding-left: 200px;
+            padding-bottom: 15px;
+        }
+
+        .layui-btn {
+            margin-left: -50px;
+            border-radius: 5px;
+            width: 350px;
+            height: 40px;
+            font-size: 15px;
+        }
+
+        .verity {
+            width: 120px;
+        }
+
+        .font-set {
+            font-size: 13px;
+            text-decoration: none;
+            margin-left: 120px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .body {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-image: url(static/layui/images/drug.png);
+            background-color: #fff;
+        }
+
+    </style>
 </head>
-<body>
-    <div class="login-main">
-        <header class="layui-elip">用户登录</header>
-        <form class="layui-form">
+<body class="body">
+
+<div class="container">
+    <div class="layui-form-item layui-word-aux">
+        <img id="logo" src="static/layui/images/logo.png" height="65">
+    </div>
+    <div class="layui-form-mid layui-word-aux">
+        <img id="logoid" src="static/layui/images/用户登录.png" height="35">
+    </div>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="username" required lay-verify="required" placeholder="用户名" class="layui-input"
+                       autocomplete="off">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
             <div class="layui-input-inline">
-                <label>用户名:</label>
-                <input type="text" name="username" required lay-verify="required" placeholder="用户名" class="layui-input" autocomplete="off">
+                <input type="password" name="password" required lay-verify="required" placeholder="密码"
+                       class="layui-input" autocomplete="off">
             </div>
-            <div class="layui-input-inline">
-                <label>密码:</label>
-                <input type="password" name="password" required lay-verify="required" placeholder="密码" class="layui-input" autocomplete="off">
-            </div>
-            <div class="layui-input-inline login-btn">
-                <button lay-submit lay-filter="login" class="layui-btn">登录</button>
-            </div>
+        </div>
+
+        <div class="layui-input-block">
+            <button lay-submit lay-filter="login" class="layui-btn">登录</button>
+        </div>
+    </form>
+    <!--<div class="layui-form-mid layui-word-aux">辅助文字</div>-->
+</div>
+</body>
         </form>
     </div>
 
