@@ -15,4 +15,21 @@ public interface UserService extends IService<User> {
 
     User queryUserByUserName(User user);
 
+    String selectUser();
+
+    void updateStatus(String username);
+
+    void clean();
+
+    String inSellDrug();
+
+    String stockNum();
+
+    String inSellDrugType();
+
+    String allProblemDrugNum();
+
+    String allReturnDrugNum();
+
+    String drugAllNum();
 }

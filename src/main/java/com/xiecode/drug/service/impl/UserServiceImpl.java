@@ -24,14 +24,59 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     /**
     * @Description: 根据用户名查询用户对象
-    * @return: com.xiecode.drug.pojo.User
-    * @Author: Xiewc
-    * @Date: 2022/2/16
-    */
+     * @return: com.xiecode.drug.pojo.User
+     * @Author: Xiewc
+     * @Date: 2022/2/16
+     */
     @Override
     public User queryUserByUserName(User user) {
         QueryWrapper<User> wrapper = new QueryWrapper<>();
         wrapper.eq("user_name", user.getUserName());
         return userMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public String selectUser() {
+        return userMapper.selectUser();
+    }
+
+    @Override
+    public void updateStatus(String username) {
+        userMapper.updateStatus(username);
+    }
+
+    @Override
+    public void clean() {
+        userMapper.cleanStatus();
+    }
+
+    @Override
+    public String inSellDrug() {
+        return userMapper.inSellDrug();
+    }
+
+    @Override
+    public String stockNum() {
+        return userMapper.stockNum();
+    }
+
+    @Override
+    public String inSellDrugType() {
+        return userMapper.inSellDrugType();
+    }
+
+    @Override
+    public String allProblemDrugNum() {
+        return userMapper.allProblemDrugNum();
+    }
+
+    @Override
+    public String allReturnDrugNum() {
+        return userMapper.allReturnDrugNum();
+    }
+
+    @Override
+    public String drugAllNum() {
+        return userMapper.drugAllNum();
     }
 }

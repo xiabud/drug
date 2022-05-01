@@ -1,5 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xiecode.drug.mapper.UserMapper">
+    <update id="updateStatus">
+        update user set status = 1 where user_name = #{username}
+    </update>
+    <update id="cleanStatus">
+        update user set status = 0
+    </update>
 
+    <select id="selectUser" resultType="java.lang.String">
+        select user_name from user where status = 1
+    </select>
+    <select id="inSellDrug" resultType="java.lang.String">
+        SELECT SUM(sellcount) FROM insell_drug_info
+    </select>
+    <select id="stockNum" resultType="java.lang.String">
+        SELECT SUM(drugCount) FROM drug_in_info
+    </select>
+    <select id="inSellDrugType" resultType="java.lang.String">
+        SELECT DISTINCT COUNT(dname) FROM insell_drug_info
+    </select>
+    <select id="allProblemDrugNum" resultType="java.lang.String">
+        SELECT SUM(dcount) FROM drug_problem_info
+    </select>
+    <select id="allReturnDrugNum" resultType="java.lang.String">
+        SELECT SUM(count) FROM return_goods_info
+    </select>
+    <select id="drugAllNum" resultType="java.lang.String">
+        SELECT SUM(count) FROM sale_info
+    </select>
 </mapper>

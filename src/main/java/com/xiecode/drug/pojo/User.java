@@ -2,9 +2,10 @@ package com.xiecode.drug.pojo;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
-import java.io.Serializable;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 /**
  * <p>
@@ -35,6 +36,11 @@ public class User implements Serializable {
      * 密码
      */
     private String password;
+
+    /**
+     * 登录状态
+     */
+    private Integer status;
 
 
 }
