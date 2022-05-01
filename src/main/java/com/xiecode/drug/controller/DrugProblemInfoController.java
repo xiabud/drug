@@ -199,17 +199,6 @@ public class DrugProblemInfoController {
             if (i1 == 0) {
                 return ResultMapUtil.getFailInsertReturnSupplier();
             }
-            //不更新药品库存的信息，因为添加药品库存信息时已经更新过了
-            //DrugInInfo drugInInfo = new DrugInInfo();
-            //drugInInfo.setDruginnum(drugProblemInfo.getDruginnum());
-            //drugInInfo.setDrugretuen(drugProblemInfo.getDcount());
-            ////TODO 药品的退货价钱
-            //drugInInfo.setDrugoutprice(0.0F);
-            //drugInInfo.setOuttime(returnSupplierInfo.getCreateTime());
-            //int i2 = drugInInfoService.updatebyDruginnum(drugInInfo);
-            //if (i2 == 0) {
-            //    return ResultMapUtil.getFailUpdateDrugInfo();
-            //}
             //更新药品信息的总库存
             int i3 = drugInfoService.updateReduceStock(drugProblemInfo.getDcount(), drugProblemInfo.getDname());
             if (i3 == 0) {

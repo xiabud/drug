@@ -89,7 +89,7 @@ public class BillInfoController {
 
 
     /**
-     * @Description: 转向账单信息添加页面
+     * @Description: 转向药品进货信息添加页面
      * @param: [billInfo]
      * @return: java.lang.Object
      * @Author: Xiewc
@@ -163,7 +163,7 @@ public class BillInfoController {
 
 
     /**
-     * @Description: 修改一个账单信息
+     * @Description: 修改一个药品进货信息
      * @param: [billInfo]
      * @return: java.lang.Object
      * @Author: Xiewc

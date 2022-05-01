@@ -36,4 +36,5 @@ public interface DrugInfoMapper extends BaseMapper<DrugInfo> {
     DrugInfo selectDrugInfoByDname(@Param("dName") String dName);
 
     List<DrugInfo> drugInfoListBySName(@Param("sName") String sName);
+
 }
