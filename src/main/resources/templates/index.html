@@ -28,7 +28,18 @@
     <div class="layui-side layui-bg-black">
         <ul class="layui-nav layui-nav-tree" lay-shrink="all">
             <!--<li class="layui-nav-item layui-nav-itemed ">这个是默认展开-->
-            <li class="layui-nav-item ">
+            <li class="layui-nav-item " style="display:none;">
+                <a href="javascript:" class="layui-nav-item">我的首页</a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="#" name="99" class="site-demo-active" lay-href="/welcome" data-id="99"
+                           data-title="我的首页">
+                            首页
+                        </a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
                 <a href="javascript:" class="layui-nav-item">药品库存管理</a>
                 <dl class="layui-nav-child">
                     <dd>
@@ -118,7 +129,9 @@
     <div class="layui-body">
         <div class="layui-tab" lay-filter="demo" lay-allowclose="ture" style="margin: 0;">
             <ul class="layui-tab-title"></ul>
-            <div class="layui-tab-content"></div>
+            <div class="layui-tab-content">
+            </div>
+
         </div>
     </div>
     <div class="layui-footer">
@@ -128,6 +141,7 @@
 </body>
 <script th:src="@{/static/layui/layui.js}"></script>
 <script>
+    var x = document.getElementsByName("99")[0];
     layui.use(['element', 'layer', 'jquery'], function () {
         var element = layui.element;
         var $ = layui.$;
@@ -186,6 +200,10 @@
         };
 
     });
+
+    window.onload = function () {
+        x.click()
+    }
 </script>
 
 </html>

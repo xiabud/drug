@@ -129,6 +129,13 @@
     outline: none;
 }
 
+.x-iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+}
+
 .layui-layout-admin .my-footer {
     height: 40px;
     padding: 2px 0;

@@ -2,15 +2,14 @@ package com.xiecode.drug.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+@RequestMapping("/welcome")
 public class TestController {
 
-    @RequestMapping("/testString")
-    @ResponseBody
+    @RequestMapping
     public String test() {
-        return "大家好！！！";
+        return "/welcome";
     }
 
 }
