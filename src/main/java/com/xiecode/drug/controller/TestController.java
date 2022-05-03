@@ -1,7 +1,9 @@
 package com.xiecode.drug.controller;
 
+import com.xiecode.drug.pojo.SysInfo;
 import com.xiecode.drug.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootVersion;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -69,5 +71,20 @@ public class TestController {
         return userService.drugAllNum();
 
     }
+
+    @RequestMapping("/sysInfo")
+    @ResponseBody
+    public Object sysInfo() {
+        SysInfo sysInfo = new SysInfo();
+        sysInfo.setJavaVersion(System.getProperty("java.version"));
+        sysInfo.setOS(System.getProperty("os.name"));
+        sysInfo.setOSUser(System.getProperty("user.name"));
+        sysInfo.setOSFrame(System.getProperty("os.arch"));
+        sysInfo.setSystemLib(System.getProperty("user.dir"));
+        sysInfo.setBVersion(SpringBootVersion.getVersion());
+        return sysInfo;
+
+    }
+
 
 }

@@ -12,11 +12,6 @@
     <link rel="stylesheet" th:href="@{/static/css/xadmin.css}">
     <script th:href="@{/static/lib/layui/layui.js}" charset="utf-8"></script>
     <script type="text/javascript" th:href="@{/static/xadmin.js}"></script>
-    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
-    <!--[if lt IE 9]>
-    <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
-    <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 <body>
 <div class="layui-fluid">
@@ -25,14 +20,15 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
                     <blockquote class="layui-elem-quote">欢迎药品管理员：
-                        <span class="x-red"><b id="userName"></b> </span>！当前时间:<b id="time"></b>
+                        <span class="x-red"><b id="userName"></b> </span>！当前时间:<b id="time"></b><span class="x-green"><b
+                                id="greet"></b></span>
                     </blockquote>
                 </div>
             </div>
         </div>
         <div class="layui-col-md12">
             <div class="layui-card">
-                <div class="layui-card-header">数据统计</div>
+                <div class="layui-card-header">药品相关信息统计</div>
                 <div class="layui-card-body ">
                     <ul class="layui-row layui-col-space10 layui-this x-admin-carousel x-admin-backlog">
                         <li class="layui-col-md2 layui-col-xs6">
@@ -90,48 +86,28 @@
                     <table class="layui-table">
                         <tbody>
                         <tr>
-                            <th>xxx版本</th>
-                            <td>1.0.180420</td>
+                            <th>java版本号</th>
+                            <td id="javaVersion"></td>
                         </tr>
                         <tr>
-                            <th>服务器地址</th>
-                            <td>x.xuebingsi.com</td>
+                            <th>操作系统名称</th>
+                            <td id="OS"></td>
                         </tr>
                         <tr>
-                            <th>操作系统</th>
-                            <td>WINNT</td>
+                            <th>操作系统用户名</th>
+                            <td id="OSUser"></td>
                         </tr>
                         <tr>
-                            <th>运行环境</th>
-                            <td>Apache/2.4.23 (Win32) OpenSSL/1.0.2j mod_fcgid/2.3.9</td>
+                            <th>操作系统的架构</th>
+                            <td id="OSFrame"></td>
                         </tr>
                         <tr>
-                            <th>PHP版本</th>
-                            <td>5.6.27</td>
+                            <th>当前程序所在目录</th>
+                            <td id="systemLib"></td>
                         </tr>
                         <tr>
-                            <th>PHP运行方式</th>
-                            <td>cgi-fcgi</td>
-                        </tr>
-                        <tr>
-                            <th>MYSQL版本</th>
-                            <td>5.5.53</td>
-                        </tr>
-                        <tr>
-                            <th>ThinkPHP</th>
-                            <td>5.0.18</td>
-                        </tr>
-                        <tr>
-                            <th>上传附件限制</th>
-                            <td>2M</td>
-                        </tr>
-                        <tr>
-                            <th>执行时间限制</th>
-                            <td>30s</td>
-                        </tr>
-                        <tr>
-                            <th>剩余空间</th>
-                            <td>86015.2M</td>
+                            <th>SpringBoot 版本号</th>
+                            <td id="bVersion"></td>
                         </tr>
                         </tbody>
                     </table>
@@ -160,7 +136,7 @@
         </div>
         <style id="welcome_style"></style>
         <div class="layui-col-md12">
-            <blockquote class="layui-elem-quote layui-quote-nm">感谢layui,百度Echarts,jquery,本系统由x-admin提供技术支持。</blockquote>
+            <blockquote class="layui-elem-quote layui-quote-nm">欢迎使用药店药品库存追踪与管理系统！</blockquote>
         </div>
     </div>
 </div>
@@ -238,11 +214,56 @@
         }
     });
 
+    //获取系统的相关信息
+    $.ajax({
+        url: '/welcome/sysInfo',
+        type: 'get',
+        async: false,
+        success: function (sysInfo) {
+
+            document.getElementById("javaVersion").innerText = sysInfo.javaVersion;
+            document.getElementById("OS").innerText = sysInfo.os;
+            document.getElementById("OSUser").innerText = sysInfo.osuser;
+            document.getElementById("OSFrame").innerText = sysInfo.osframe;
+            document.getElementById("systemLib").innerText = sysInfo.systemLib;
+            document.getElementById("bVersion").innerText = sysInfo.bversion;
+        }
+    });
+
     function getTime() {
         let date = new Date();
         let time = date.toLocaleString();
         document.getElementById("time").innerText = time;
+        if (checkAuditTime("6:01", "11:00")) {
+            document.getElementById("greet").innerText = "，早上好，欢迎使用药店药品库存追踪与管理系统！";
+        } else if (checkAuditTime("11:01", "13:00")) {
+            document.getElementById("greet").innerText = "，中午好，欢迎使用药店药品库存追踪与管理系统！";
+        } else if (checkAuditTime("13:01", "18:00")) {
+            document.getElementById("greet").innerText = "，下午好，欢迎使用药店药品库存追踪与管理系统！";
+        } else if (checkAuditTime("18:01", "22:00")) {
+            document.getElementById("greet").innerText = "，晚上好，欢迎使用药店药品库存追踪与管理系统！";
+        } else if (checkAuditTime("22:01", "23:59") || checkAuditTime("00:00", "6:00")) {
+            document.getElementById("greet").innerText = "，夜深了，请尽快休息。";
+        }
 
+    }
+
+    //判断当前的时间
+    function checkAuditTime(beginTime, endTime) {
+        let nowDate = new Date();
+        let beginDate = new Date(nowDate);
+        let endDate = new Date(nowDate);
+
+        let beginIndex = beginTime.lastIndexOf("\:");
+        let beginHour = beginTime.substring(0, beginIndex);
+        let beginMinue = beginTime.substring(beginIndex + 1, beginTime.length);
+        beginDate.setHours(beginHour, beginMinue, 0, 0);
+
+        let endIndex = endTime.lastIndexOf("\:");
+        let endHour = endTime.substring(0, endIndex);
+        let endMinue = endTime.substring(endIndex + 1, endTime.length);
+        endDate.setHours(endHour, endMinue, 0, 0);
+        return nowDate.getTime() - beginDate.getTime() >= 0 && nowDate.getTime() <= endDate.getTime();
     }
 
     window.onload = function () {

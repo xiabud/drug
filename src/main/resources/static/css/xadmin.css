@@ -29,6 +29,10 @@ body {
     color: red;
 }
 
+.x-green {
+    color: #0000FF;
+}
+
 .layui-form-switch {
     margin-top: 0px;
 }
