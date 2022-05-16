@@ -99,7 +99,6 @@ public class OutOrInInfoController {
     @ResponseBody
     public Object outOrInInfoAdd(OutOrInInfo outorininfo) {
         try {
-            System.out.println("===========" + outorininfo + "============");
             if (outorininfo.getType().equals("入库")) {
                 //更新药品信息里面的库存
                 outorininfo.setType("非供应商进货：入库");
@@ -119,8 +118,6 @@ public class OutOrInInfoController {
                     return ResultMapUtil.getStockLess();
                 }
                 outorininfo.setType("发出药品销售：出库");
-                //如果库存足够，则更新药品信息里面的库存(不需要更新！)
-                //drugInfoService.updateReduceStock(outorininfo.getCount(), outorininfo.getDname());
                 //减少药品库存里的数量
                 DrugInInfo drugInInfo = new DrugInInfo();
                 drugInInfo.setDruginnum(outorininfo.getDruginnum());
@@ -130,7 +127,6 @@ public class OutOrInInfoController {
                     return ResultMapUtil.getUpdateStockFail();
                 }
                 DrugInfo drugInfo = drugInfoService.selectDrugInfoByDname(outorininfo.getDname());
-
                 //新增药品在售信息表,如果此前已经出库过当前批号的药品，则更新药品在售信息表
                 InsellDrugInfo insellDrugInfo = new InsellDrugInfo();
                 InsellDrugInfo insellDrugInfo1 = insellDrugInfoService.selectDrugCountByDruginnum(outorininfo.getDruginnum());
@@ -156,7 +152,6 @@ public class OutOrInInfoController {
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);
         }
-
     }
 
 

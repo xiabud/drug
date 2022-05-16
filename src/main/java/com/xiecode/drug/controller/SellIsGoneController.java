@@ -6,7 +6,6 @@ import com.xiecode.drug.common.ResultMapUtil;
 import com.xiecode.drug.pojo.DrugInfo;
 import com.xiecode.drug.pojo.InsellDrugInfo;
 import com.xiecode.drug.pojo.SellIsGone;
-import com.xiecode.drug.service.BillInfoService;
 import com.xiecode.drug.service.DrugInfoService;
 import com.xiecode.drug.service.InsellDrugInfoService;
 import com.xiecode.drug.service.SellIsGoneService;
@@ -38,9 +37,6 @@ public class SellIsGoneController {
 
     @Autowired
     private InsellDrugInfoService insellDrugInfoService;
-
-    @Autowired
-    private BillInfoService billInfoService;
 
     @Autowired
     private DrugInfoService drugInfoService;

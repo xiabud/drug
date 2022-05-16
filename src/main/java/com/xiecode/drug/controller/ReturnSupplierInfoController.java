@@ -111,7 +111,6 @@ public class ReturnSupplierInfoController {
             if (l == 0) {
                 return ResultMapUtil.getFailUpdateDrugInfo();
             }
-
             int k = 0;
             if (i == 1 && j == 1) {
                 k = 1;
@@ -121,7 +120,6 @@ public class ReturnSupplierInfoController {
             System.out.println(e.getMessage());
             return ResultMapUtil.getHashMapException(e);
         }
-
     }
 
 

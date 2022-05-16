@@ -124,7 +124,6 @@ public class SaleInfoController {
         } catch (Exception e) {
             return ResultMapUtil.getHashMapException(e);
         }
-
     }
 
 
