@@ -13,8 +13,6 @@ class DrugApplicationTests {
 
     @Test
     void contextLoads() {
-
     }
-
 
 }
