@@ -196,49 +196,74 @@ INSERT INTO `insell_drug_info` VALUES (11, '牛黄清心丸', '药DIP0506155818'
 -- ----------------------------
 DROP TABLE IF EXISTS `out_or_in_info`;
 CREATE TABLE `out_or_in_info`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
-  `type` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出库？入库？类型',
-  `count` int(0) NULL DEFAULT NULL COMMENT '出入库数量',
-  `operator` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作人',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
-  `drugInNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '批号',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '出入库' ROW_FORMAT = Dynamic;
+                                   `id`          int(0)                                                  NOT NULL AUTO_INCREMENT COMMENT '主键',
+                                   `dname`       varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
+                                   `type`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '出库？入库？类型',
+                                   `count`       int(0)                                                  NULL DEFAULT NULL COMMENT '出入库数量',
+                                   `operator`    varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作人',
+                                   `create_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '操作时间',
+                                   `drugInNum`   varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '批号',
+                                   PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 48
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci COMMENT = '出入库'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of out_or_in_info
 -- ----------------------------
-INSERT INTO `out_or_in_info` VALUES (29, '天紫红女金胶囊', '从供应商进货：入库', 1000, '谢炜程', '2022-04-01 00:00:00', '药DIP0423107398');
-INSERT INTO `out_or_in_info` VALUES (30, '天紫红女金胶囊', '发出药品销售：出库', 400, '谢炜程', '2022-04-23 10:41:05', '药DIP0423107398');
-INSERT INTO `out_or_in_info` VALUES (31, '天紫红女金胶囊', '发出药品销售：出库', 100, '谢炜程', '2022-04-23 10:47:00', '药DIP0423107398');
-INSERT INTO `out_or_in_info` VALUES (32, '苦甘颗粒', '从供应商进货：入库', 100, '谢炜程', '2022-04-02 00:00:00', '药DIP0423147525');
-INSERT INTO `out_or_in_info` VALUES (33, '板蓝根颗粒', '从供应商进货：入库', 1000, '谢炜程', '2022-04-23 00:00:00', '药DIP0424019877');
-INSERT INTO `out_or_in_info` VALUES (34, '苦甘颗粒', '发出药品销售：出库', 80, '谢炜程', '2022-04-24 02:38:39', '药DIP0423147525');
-INSERT INTO `out_or_in_info` VALUES (35, '板蓝根颗粒', '发出药品销售：出库', 500, '谢炜程', '2022-04-24 13:12:12', '药DIP0424019877');
-INSERT INTO `out_or_in_info` VALUES (36, '四物膏', '从供应商进货：入库', 1000, '谢炜程', '2022-04-08 00:00:00', '药DIP0425006837');
-INSERT INTO `out_or_in_info` VALUES (37, '四物膏', '发出药品销售：出库', 500, '谢炜程', '2022-04-25 00:56:21', '药DIP0425006837');
-INSERT INTO `out_or_in_info` VALUES (38, '盐酸安罗替尼胶囊(福可维)', '从供应商进货：入库', 1000, '谢炜程', '2022-04-15 00:00:00', '药DIP0425002813');
-INSERT INTO `out_or_in_info` VALUES (39, '盐酸安罗替尼胶囊(福可维)', '从供应商进货：入库', 55, '谢炜程', '2022-04-01 00:00:00', '药DIP0428158843');
-INSERT INTO `out_or_in_info` VALUES (40, '四物膏', '发出药品销售：出库', 50, '谢炜程', '2022-05-02 02:10:55', '药DIP0425006837');
-INSERT INTO `out_or_in_info` VALUES (41, '苦甘颗粒', '从供应商进货：入库', 1000, '谢炜程', '2022-05-03 00:00:00', '药DIP0504001814');
-INSERT INTO `out_or_in_info` VALUES (42, '苦甘颗粒', '发出药品销售：出库', 980, '谢炜程', '2022-05-04 00:09:33', '药DIP0504001814');
-INSERT INTO `out_or_in_info` VALUES (43, '牛黄清心丸', '从供应商进货：入库', 1000, '谢炜程', '2022-05-03 00:00:00', '药DIP0504001837');
-INSERT INTO `out_or_in_info` VALUES (44, '牛黄清心丸', '发出药品销售：出库', 980, '谢炜程', '2022-05-04 00:32:12', '药DIP0504001837');
-INSERT INTO `out_or_in_info` VALUES (45, '阿莫西林颗粒', '从供应商进货：入库', 1000, '谢炜程', '2022-05-04 00:00:00', '药DIP0504001821');
-INSERT INTO `out_or_in_info` VALUES (46, '阿莫西林颗粒', '发出药品销售：出库', 980, '谢炜程', '2022-05-04 00:44:33', '药DIP0504001821');
-INSERT INTO `out_or_in_info` VALUES (47, '牛黄清心丸', '从供应商进货：入库', 500, '谢炜程', '2022-05-06 00:00:00', '药DIP0506155818');
-INSERT INTO `out_or_in_info` VALUES (48, '牛黄清心丸', '发出药品销售：出库', 400, '谢炜程', '2022-05-06 16:00:08', '药DIP0506155818');
+INSERT INTO `out_or_in_info`
+VALUES (29, '天紫红女金胶囊', '从供应商进货：入库', 1000, '夏步D', '2022-04-01 00:00:00', '药DIP0423107398');
+INSERT INTO `out_or_in_info`
+VALUES (30, '天紫红女金胶囊', '发出药品销售：出库', 400, '夏步D', '2022-04-23 10:41:05', '药DIP0423107398');
+INSERT INTO `out_or_in_info`
+VALUES (31, '天紫红女金胶囊', '发出药品销售：出库', 100, '夏步D', '2022-04-23 10:47:00', '药DIP0423107398');
+INSERT INTO `out_or_in_info`
+VALUES (32, '苦甘颗粒', '从供应商进货：入库', 100, '夏步D', '2022-04-02 00:00:00', '药DIP0423147525');
+INSERT INTO `out_or_in_info`
+VALUES (33, '板蓝根颗粒', '从供应商进货：入库', 1000, '夏步D', '2022-04-23 00:00:00', '药DIP0424019877');
+INSERT INTO `out_or_in_info`
+VALUES (34, '苦甘颗粒', '发出药品销售：出库', 80, '夏步D', '2022-04-24 02:38:39', '药DIP0423147525');
+INSERT INTO `out_or_in_info`
+VALUES (35, '板蓝根颗粒', '发出药品销售：出库', 500, '夏步D', '2022-04-24 13:12:12', '药DIP0424019877');
+INSERT INTO `out_or_in_info`
+VALUES (36, '四物膏', '从供应商进货：入库', 1000, '夏步D', '2022-04-08 00:00:00', '药DIP0425006837');
+INSERT INTO `out_or_in_info`
+VALUES (37, '四物膏', '发出药品销售：出库', 500, '夏步D', '2022-04-25 00:56:21', '药DIP0425006837');
+INSERT INTO `out_or_in_info`
+VALUES (38, '盐酸安罗替尼胶囊(福可维)', '从供应商进货：入库', 1000, '夏步D', '2022-04-15 00:00:00', '药DIP0425002813');
+INSERT INTO `out_or_in_info`
+VALUES (39, '盐酸安罗替尼胶囊(福可维)', '从供应商进货：入库', 55, '夏步D', '2022-04-01 00:00:00', '药DIP0428158843');
+INSERT INTO `out_or_in_info`
+VALUES (40, '四物膏', '发出药品销售：出库', 50, '夏步D', '2022-05-02 02:10:55', '药DIP0425006837');
+INSERT INTO `out_or_in_info`
+VALUES (41, '苦甘颗粒', '从供应商进货：入库', 1000, '夏步D', '2022-05-03 00:00:00', '药DIP0504001814');
+INSERT INTO `out_or_in_info`
+VALUES (42, '苦甘颗粒', '发出药品销售：出库', 980, '夏步D', '2022-05-04 00:09:33', '药DIP0504001814');
+INSERT INTO `out_or_in_info`
+VALUES (43, '牛黄清心丸', '从供应商进货：入库', 1000, '夏步D', '2022-05-03 00:00:00', '药DIP0504001837');
+INSERT INTO `out_or_in_info`
+VALUES (44, '牛黄清心丸', '发出药品销售：出库', 980, '夏步D', '2022-05-04 00:32:12', '药DIP0504001837');
+INSERT INTO `out_or_in_info`
+VALUES (45, '阿莫西林颗粒', '从供应商进货：入库', 1000, '夏步D', '2022-05-04 00:00:00', '药DIP0504001821');
+INSERT INTO `out_or_in_info`
+VALUES (46, '阿莫西林颗粒', '发出药品销售：出库', 980, '夏步D', '2022-05-04 00:44:33', '药DIP0504001821');
+INSERT INTO `out_or_in_info`
+VALUES (47, '牛黄清心丸', '从供应商进货：入库', 500, '夏步D', '2022-05-06 00:00:00', '药DIP0506155818');
+INSERT INTO `out_or_in_info`
+VALUES (48, '牛黄清心丸', '发出药品销售：出库', 400, '夏步D', '2022-05-06 16:00:08', '药DIP0506155818');
 
 -- ----------------------------
 -- Table structure for return_goods_info
 -- ----------------------------
 DROP TABLE IF EXISTS `return_goods_info`;
-CREATE TABLE `return_goods_info`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
-  `count` int(0) NULL DEFAULT NULL COMMENT '数量',
-  `reason` varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退货原因',
+CREATE TABLE `return_goods_info`
+(
+    `id`         int(0)                                                   NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `dname`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci  NULL DEFAULT NULL COMMENT '药品名称',
+    `count`      int(0)                                                   NULL DEFAULT NULL COMMENT '数量',
+    `reason`     varchar(1000) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '退货原因',
   `total` float(20, 2) NULL DEFAULT NULL COMMENT '总金额',
   `operate_time` datetime(0) NULL DEFAULT NULL COMMENT '退货时间',
   `innum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品进货批号',
@@ -283,39 +308,54 @@ INSERT INTO `return_supplier_info` VALUES (38, '牛黄清心丸', 100, '山西�
 -- ----------------------------
 DROP TABLE IF EXISTS `sale_info`;
 CREATE TABLE `sale_info`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `dname` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
-  `innum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品编码',
-  `count` int(0) NULL DEFAULT NULL COMMENT '销售数量',
-  `total` float(20, 2) NULL DEFAULT NULL COMMENT '总金额',
-  `operator` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作人',
-  `operate_time` datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '账单信息表' ROW_FORMAT = Dynamic;
+                              `id`           int(0)                                                  NOT NULL AUTO_INCREMENT COMMENT '主键',
+                              `dname`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
+                              `innum`        varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品编码',
+                              `count`        int(0)                                                  NULL DEFAULT NULL COMMENT '销售数量',
+                              `total`        float(20, 2)                                            NULL DEFAULT NULL COMMENT '总金额',
+                              `operator`     varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '操作人',
+                              `operate_time` datetime(0)                                             NULL DEFAULT NULL COMMENT '操作时间',
+                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 18
+  CHARACTER SET = utf8
+  COLLATE = utf8_general_ci COMMENT = '账单信息表'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sale_info
 -- ----------------------------
-INSERT INTO `sale_info` VALUES (9, '天紫红女金胶囊', '药DIP0423107398', 10, 806.00, '谢炜程', '2022-04-23 10:41:52');
-INSERT INTO `sale_info` VALUES (10, '天紫红女金胶囊', '药DIP0423107398', 30, 2418.00, '谢炜程', '2022-04-23 10:42:20');
-INSERT INTO `sale_info` VALUES (11, '天紫红女金胶囊', '药DIP0423107398', 400, 32240.00, '谢炜程', '2022-04-23 10:48:05');
-INSERT INTO `sale_info` VALUES (12, '天紫红女金胶囊', '药DIP0423107398', 60, 4836.00, '谢炜程', '2022-04-23 10:51:39');
-INSERT INTO `sale_info` VALUES (13, '苦甘颗粒', '药DIP0423147525', 1, 31.40, '谢炜程', '2022-04-24 02:56:48');
-INSERT INTO `sale_info` VALUES (14, '苦甘颗粒', '药DIP0423147525', 79, 2480.60, '谢炜程', '2022-04-24 03:13:54');
-INSERT INTO `sale_info` VALUES (15, '四物膏', '药DIP0425006837', 11, 916.30, '谢炜程', '2022-04-25 01:07:36');
-INSERT INTO `sale_info` VALUES (16, '苦甘颗粒', '药DIP0504001814', 20, 628.00, '谢炜程', '2022-05-04 00:10:20');
-INSERT INTO `sale_info` VALUES (17, '牛黄清心丸', '药DIP0504001837', 50, 6400.00, '谢炜程', '2022-05-04 00:32:43');
-INSERT INTO `sale_info` VALUES (18, '阿莫西林颗粒', '药DIP0504001821', 80, 9600.00, '谢炜程', '2022-05-04 00:45:01');
+INSERT INTO `sale_info`
+VALUES (9, '天紫红女金胶囊', '药DIP0423107398', 10, 806.00, '夏步D', '2022-04-23 10:41:52');
+INSERT INTO `sale_info`
+VALUES (10, '天紫红女金胶囊', '药DIP0423107398', 30, 2418.00, '夏步D', '2022-04-23 10:42:20');
+INSERT INTO `sale_info`
+VALUES (11, '天紫红女金胶囊', '药DIP0423107398', 400, 32240.00, '夏步D', '2022-04-23 10:48:05');
+INSERT INTO `sale_info`
+VALUES (12, '天紫红女金胶囊', '药DIP0423107398', 60, 4836.00, '夏步D', '2022-04-23 10:51:39');
+INSERT INTO `sale_info`
+VALUES (13, '苦甘颗粒', '药DIP0423147525', 1, 31.40, '夏步D', '2022-04-24 02:56:48');
+INSERT INTO `sale_info`
+VALUES (14, '苦甘颗粒', '药DIP0423147525', 79, 2480.60, '夏步D', '2022-04-24 03:13:54');
+INSERT INTO `sale_info`
+VALUES (15, '四物膏', '药DIP0425006837', 11, 916.30, '夏步D', '2022-04-25 01:07:36');
+INSERT INTO `sale_info`
+VALUES (16, '苦甘颗粒', '药DIP0504001814', 20, 628.00, '夏步D', '2022-05-04 00:10:20');
+INSERT INTO `sale_info`
+VALUES (17, '牛黄清心丸', '药DIP0504001837', 50, 6400.00, '夏步D', '2022-05-04 00:32:43');
+INSERT INTO `sale_info`
+VALUES (18, '阿莫西林颗粒', '药DIP0504001821', 80, 9600.00, '夏步D', '2022-05-04 00:45:01');
 
 -- ----------------------------
 -- Table structure for sell_is_gone
 -- ----------------------------
 DROP TABLE IF EXISTS `sell_is_gone`;
-CREATE TABLE `sell_is_gone`  (
-  `id` int(0) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `name` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
-  `supplier` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '供应商',
-  `drugInNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '进货批号',
+CREATE TABLE `sell_is_gone`
+(
+    `id`        int(0)                                                  NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name`      varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '药品名称',
+    `supplier`  varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '供应商',
+    `drugInNum` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '进货批号',
   `sellNnum` int(0) NULL DEFAULT NULL COMMENT '销售数量',
   `returnNum` int(0) NULL DEFAULT NULL COMMENT '退货数量',
   `sellRate` float(10, 2) NULL DEFAULT NULL COMMENT '销售率',

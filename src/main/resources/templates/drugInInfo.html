@@ -141,9 +141,10 @@
             var now_time = (year * 12 + month) * 30 + date.getDay();
             var m = itime + (parseInt(d.warranty) * 30) - now_time;
             if (m <= 90 && m >= 0) {
-                return "<span style='color:blue'>" + 保质期仅剩 + m + "天 </span>";
+                return "<span style='color:blue'>保质期仅剩" + m + "天 </span>";
             } else if (m < 0) {
-                return "<span style='color:red'>" + 已过期 + m + "天</span>";
+                var mStr = m.toString().slice(1);
+                return "<span style='color:red'>已过期" + mStr + "天</span>";
             } else if (m > 90) {
                 return "<span style='color:green'>药品未过期，剩余" + m + "天</span>";
             }
